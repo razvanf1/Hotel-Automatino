@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RoomService from '../services/RoomService';
+import RoomServices from '../services/RoomService'
 
 class ListRoomComponent extends Component {
     constructor(props){
@@ -12,43 +12,46 @@ class ListRoomComponent extends Component {
 
 
     componentDidMount(){
-        RoomService.getRooms().then((res) => {
+        RoomServices.getRooms().then((res) => {
             this.setState({rooms: res.data});
         })
     }
     render() {
         return (
             <div>
-                <h2 className = "text-center">Room List</h2>
+                <h2 className="text-center">Rooms List</h2>
                 <div className = "row">
-                    <table className = "table table-striped table-bordered">
+                        <table className = "table table-striped table-bordered">
 
-                        <thread>
-                            <tr>
-                                <th>Room id</th>
-                                <th>Room status</th>
-                                <th>Room type</th>
-                                <th>Price</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thread>
+                            <thead>
+                                <tr>
+                                    <th> Room Status</th>
+                                    <th> Room Type</th>
+                                    <th> Room Price</th>
+                                    <th> Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.rooms.map(
+                                        room => 
+                                        <tr key = {room.id}>
+                                             <td> {room.roomStatus} </td>   
+                                             <td> {room.roomType}</td>
+                                             <td> {room.price}</td>
+                                             <td>
+                                                 <button className ="btn btn-primary">Edit </button>
+                                                 <button style={{marginLeft: "10px"}} className="btn btn-danger">Delete </button>
+                                                 <button style={{marginLeft: "10px"}} className="btn btn-info">View </button>
+                                             </td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                        </table>
 
-                        <tbody>
-                            {
-                                this.state.rooms.map(
-                                    room => 
-                                    <tr key = {room.id}>
-                                        <td>{room.status}</td>
-                                        <td>{room.type}</td>
-                                        <td>{room.price}</td>
-                                    </tr>
-                                )
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-
+                 </div>
+            
             </div>
         );
     }
