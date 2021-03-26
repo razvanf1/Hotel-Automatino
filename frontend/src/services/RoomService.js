@@ -7,6 +7,11 @@ class RoomService{
     getRooms(){
         return axios.get(ROOM_API_BASE_URL);
     }
+
+    createRoom(room){
+        return axios.post(ROOM_API_BASE_URL, room);
+    }
+
 }
 
 export default new RoomService();
