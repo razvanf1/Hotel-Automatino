@@ -1,10 +1,7 @@
 package yourSolution.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import yourSolution.springboot.model.Room;
 import yourSolution.springboot.repository.RoomRepository;
 
@@ -22,5 +19,10 @@ public class RoomController {
     @GetMapping("/rooms")
     public List<Room> getAllRooms() {
         return roomRepository.findAll();
+    }
+
+    @PostMapping("/rooms")
+    public Room createRoom(@RequestBody Room room) {
+        return roomRepository.save(room);
     }
 }
