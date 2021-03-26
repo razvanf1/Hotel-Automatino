@@ -20,14 +20,18 @@ public class Room {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "room_number")
+    private int roomNumber;
+
     public Room() {
 
     }
 
-    public Room(int roomStatus, int roomType, int price) {
+    public Room(int roomStatus, int roomType, int price, int roomNumber) {
         this.roomStatus = roomStatus;
         this.roomType = roomType;
         this.price = price;
+        this.roomNumber = roomNumber;
     }
 
     public int getId() {
@@ -60,5 +64,13 @@ public class Room {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 }
