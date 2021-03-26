@@ -46,7 +46,7 @@ class ListRoomComponent extends Component {
                                     this.state.rooms.map(
                                         room => 
                                         <tr key = {room.id}>
-                                             <td> {room.number}</td>
+                                             <td> {room.roomNumber}</td>
                                              <td> {room.roomStatus} </td>   
                                              <td> {room.roomType}</td>
                                              <td> {room.price}</td>

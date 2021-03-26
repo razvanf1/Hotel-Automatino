@@ -8,7 +8,7 @@ class CreateRoomComponent extends Component {
         this.state = {
             roomNumber: '',
             roomType: '',
-            roomPrice: ''
+            price: ''
         }  
 
         this.changeRoomNumberHandler = this.changeRoomNumberHandler.bind(this);
@@ -19,7 +19,7 @@ class CreateRoomComponent extends Component {
 
     saveRoom = (event) => {
         event.preventDefault()
-        let room = {roomNumber: this.state.roomNumber, roomType: this.state.roomType, roomPrice: this.state.roomPrice};
+        let room = {roomNumber: this.state.roomNumber, roomType: this.state.roomType, price: this.state.price};
         console.log('room => ' + JSON.stringify(room));
 
         RoomService.createRoom(room).then(res => {
@@ -36,7 +36,7 @@ class CreateRoomComponent extends Component {
     }
 
     changeRoomPriceHandler = (event) =>{
-        this.setState({roomPrice: event.target.value});
+        this.setState({price: event.target.value});
     }
 
     cancel(){
@@ -66,7 +66,7 @@ class CreateRoomComponent extends Component {
                                     <div className ="form-group">
                                         <label> Room Price: </label>
                                         <input placeholder="Room Price" name="roomPrice" className="form-control" 
-                                            value={this.state.roomPrice} onChange={this.changeRoomPriceHandler}/>
+                                            value={this.state.price} onChange={this.changeRoomPriceHandler}/>
                                     </div>
 
                                     <button className="btn btn-success" onClick={this.saveRoom}>Save</button>
