@@ -6,20 +6,20 @@ class CreateRoomComponent extends Component {
     {
         super(props)
         this.state = {
-            roomNumber: '',
-            roomType: '',
+            number: '',
+            type: '',
             price: ''
         }  
 
-        this.changeRoomNumberHandler = this.changeRoomNumberHandler.bind(this);
-        this.changeRoomTypeHandler = this.changeRoomTypeHandler.bind(this);
-        this.changeRoomPriceHandler = this.changeRoomPriceHandler.bind(this);
+        this.changeNumberHandler = this.changeNumberHandler.bind(this);
+        this.changeTypeHandler = this.changeTypeHandler.bind(this);
+        this.changePriceHandler = this.changePriceHandler.bind(this);
         this.saveRoom = this.saveRoom.bind(this);
     }
 
     saveRoom = (event) => {
         event.preventDefault()
-        let room = {roomNumber: this.state.roomNumber, roomType: this.state.roomType, price: this.state.price};
+        let room = {number: this.state.number, type: this.state.type, price: this.state.price};
         console.log('room => ' + JSON.stringify(room));
 
         RoomService.createRoom(room).then(res => {
@@ -27,15 +27,15 @@ class CreateRoomComponent extends Component {
         })
     }
 
-    changeRoomNumberHandler = (event) => {
-        this.setState({roomNumber: event.target.value});
+    changeNumberHandler = (event) => {
+        this.setState({number: event.target.value});
     }
 
-    changeRoomTypeHandler = (event) => {
-        this.setState({roomType: event.target.value});
+    changeTypeHandler = (event) => {
+        this.setState({type: event.target.value});
     }
 
-    changeRoomPriceHandler = (event) =>{
+    changePriceHandler = (event) =>{
         this.setState({price: event.target.value});
     }
 
@@ -55,18 +55,18 @@ class CreateRoomComponent extends Component {
                                 <form>
                                     <div className ="form-group">
                                         <label> Room Number: </label>
-                                        <input placeholder="Room Number" name="roomNumber" className="form-control" 
-                                            value={this.state.roomNumber} onChange={this.changeRoomNumberHandler}/>
+                                        <input placeholder="Room Number" name="number" className="form-control" 
+                                            value={this.state.number} onChange={this.changeNumberHandler}/>
                                     </div>
                                     <div className ="form-group">
                                         <label >Room Type: </label>
-                                        <input placeholder="Room Type" name="roomType" className="form-control" 
-                                            value={this.state.roomType} onChange={this.changeRoomTypeHandler}/>
+                                        <input placeholder="Room Type" name="type" className="form-control" 
+                                            value={this.state.type} onChange={this.changeTypeHandler}/>
                                     </div>
                                     <div className ="form-group">
                                         <label> Room Price: </label>
-                                        <input placeholder="Room Price" name="roomPrice" className="form-control" 
-                                            value={this.state.price} onChange={this.changeRoomPriceHandler}/>
+                                        <input placeholder="Room Price" name="price" className="form-control" 
+                                            value={this.state.price} onChange={this.changePriceHandler}/>
                                     </div>
 
                                     <button className="btn btn-success" onClick={this.saveRoom}>Save</button>

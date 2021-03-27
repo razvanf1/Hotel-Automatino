@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `admins`
 --
+CREATE DATABASE IF NOT EXISTS `test`;
+
 
 CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
@@ -61,10 +63,10 @@ CREATE TABLE `guests` (
 
 CREATE TABLE `rooms` (
   `id` int(11) NOT NULL,
-  `room_status` int(1) NOT NULL,
-  `room_type` int(1) NOT NULL,
+  `status` int(1) NOT NULL,
+  `type` int(1) NOT NULL,
   `price` int(10) NOT NULL,
-  `room_number` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -73,7 +75,7 @@ CREATE TABLE `rooms` (
 -- Dumping data for table `rooms`
 --
 
-INSERT INTO `rooms` (`id`, `room_status`, `room_type`, `price`, `room_number`, `created_at`, `updated_at`) VALUES
+INSERT INTO `rooms` (`id`, `status`, `type`, `price`, `number`, `created_at`, `updated_at`) VALUES
 (6, 1, 2, 160, 1, '2021-03-26 09:21:16', '2021-03-26 09:21:16'),
 (7, 0, 1, 120, 2, '2021-03-26 09:21:47', '2021-03-26 09:21:47');
 
@@ -114,7 +116,7 @@ ALTER TABLE `guests`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `room_number` (`room_number`);
+  ADD UNIQUE KEY `number` (`number`);
 
 --
 -- Indexes for table `staff`

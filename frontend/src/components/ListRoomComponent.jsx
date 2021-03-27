@@ -46,9 +46,9 @@ class ListRoomComponent extends Component {
                                     this.state.rooms.map(
                                         room => 
                                         <tr key = {room.id}>
-                                             <td> {room.roomNumber}</td>
-                                             <td> {room.roomStatus} </td>   
-                                             <td> {room.roomType}</td>
+                                             <td> {room.number}</td>
+                                             <td> {room.status} </td>   
+                                             <td> {room.type}</td>
                                              <td> {room.price}</td>
                                              <td>
                                                  <button className ="btn btn-primary">Edit </button>

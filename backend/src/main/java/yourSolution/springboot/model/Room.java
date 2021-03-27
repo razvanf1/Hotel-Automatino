@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "rooms")
-@NoArgsConstructor
 @RequiredArgsConstructor
 @Data
 public class Room {
