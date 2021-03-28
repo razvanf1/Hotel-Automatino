@@ -1,10 +1,11 @@
-package yourSolution.springboot.controller;
+package trustyshoes.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import yourSolution.springboot.model.Room;
-import yourSolution.springboot.repository.RoomRepository;
+import trustyshoes.springboot.repository.RoomRepository;
+import trustyshoes.springboot.model.Room;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -22,7 +23,7 @@ public class RoomController {
     }
 
     @PostMapping("/rooms")
-    public Room createRoom(@RequestBody Room room) {
+    public Room createRoom(@Valid @RequestBody Room room) {
         return roomRepository.save(room);
     }
 }

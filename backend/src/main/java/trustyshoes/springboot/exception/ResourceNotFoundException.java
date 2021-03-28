@@ -1,4 +1,4 @@
-package yourSolution.springboot.exception;
+package trustyshoes.springboot.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
