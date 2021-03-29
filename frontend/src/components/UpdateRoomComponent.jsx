@@ -15,6 +15,8 @@ class UpdateRoomComponent extends Component {
             this.changeNumberHandler = this.changeNumberHandler.bind(this);
             this.changeTypeHandler = this.changeTypeHandler.bind(this);
             this.changePriceHandler = this.changePriceHandler.bind(this);
+            this.changeStatusHandler = this.changeStatusHandler.bind(this);
+
             this.editRoom = this.editRoom.bind(this);
         }
 
@@ -24,6 +26,7 @@ class UpdateRoomComponent extends Component {
                 let room = res.data;
                 this.setState({number: room.number,
                     type: room.type,
+                    status: room.status,
                     price: room.price
                 });
             });
@@ -45,6 +48,10 @@ class UpdateRoomComponent extends Component {
     
         changePriceHandler = (event) =>{
             this.setState({price: event.target.value});
+        }
+
+        changeStatusHandler = (event) =>{
+            this.setState({status: event.target.value});
         }
     
         cancel(){
@@ -70,6 +77,11 @@ class UpdateRoomComponent extends Component {
                                             <label >Room Type: </label>
                                             <input placeholder="Room Type" name="type" className="form-control" 
                                                 value={this.state.type} onChange={this.changeTypeHandler}/>
+                                        </div>
+                                        <div className ="form-group">
+                                            <label> Room Status: </label>
+                                            <input placeholder="Room Status" name="status" className="form-control" 
+                                                value={this.state.status} onChange={this.changeStatusHandler}/>
                                         </div>
                                         <div className ="form-group">
                                             <label> Room Price: </label>
