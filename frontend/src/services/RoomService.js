@@ -12,6 +12,10 @@ class RoomService{
         return axios.post(ROOM_API_BASE_URL, room);
     }
 
+    getRoomById(roomId){
+        return axios.get(ROOM_API_BASE_URL + '/' + roomId);
+    }
+
 }
 
 export default new RoomService();
