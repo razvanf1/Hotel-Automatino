@@ -24,19 +24,29 @@ public class RoomController {
         return roomRepository.findAll();
     }
 
+    @GetMapping("/rooms/{id}")
+    public Room getRoomById(@PathVariable Integer id){
+        return roomRepository.findById(id).get();
+    }
+
     @PostMapping("/rooms")
     public Room createRoom(@Valid @RequestBody Room room){
         return roomRepository.save(room);
     }
 
-    @PutMapping("/rooms/{nr}")
-    public ResponseEntity<Room> updateRoom(@PathVariable Integer nr, @RequestBody Room room){
-        Room roomToUpdate = roomRepository.findById(nr).get();
+    @PutMapping("/rooms/{id}")
+    public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @RequestBody Room room){
+        Room roomToUpdate = roomRepository.findById(id).get();
         roomToUpdate.setNumber(room.getNumber());
         roomToUpdate.setPrice(room.getPrice());
         roomToUpdate.setStatus(room.getStatus());
         roomToUpdate.setType(room.getStatus());
         return ResponseEntity.ok(roomRepository.save(roomToUpdate));
+    }
+
+    @DeleteMapping("/rooms/{id}")
+    public void deleteRoom(@PathVariable Integer id){
+        roomRepository.delete(roomRepository.findById(id).get());
     }
 
 }
