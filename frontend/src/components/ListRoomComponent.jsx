@@ -9,7 +9,12 @@ class ListRoomComponent extends Component {
             rooms: []
         }
         this.addRoom = this.addRoom.bind(this);
+        this.editRoom = this.editRoom.bind(this);
 
+    }
+
+    editRoom(id){
+        this.props.history.push(`admin/update-room/${id}`);
     }
 
     componentDidMount(){
@@ -51,8 +56,8 @@ class ListRoomComponent extends Component {
                                              <td> {room.type}</td>
                                              <td> {room.price}</td>
                                              <td>
-                                                 <button className ="btn btn-primary">Edit </button>
-                                                 <button style={{marginLeft: "10px"}} className="btn btn-danger">Delete </button>
+                                                 <button className ="btn btn-primary" onClick = { () => this.editRoom(room.id)} >Edit </button>
+                                                 <button  className="btn btn-danger" style={{marginLeft: "10px"}}>Delete </button>
                                                  <button style={{marginLeft: "10px"}} className="btn btn-info">View </button>
                                              </td>
                                         </tr>
