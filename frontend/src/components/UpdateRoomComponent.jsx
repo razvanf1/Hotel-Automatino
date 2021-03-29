@@ -33,8 +33,6 @@ class UpdateRoomComponent extends Component {
             event.preventDefault()
             let room = {number: this.state.number, type: this.state.type, price: this.state.price};
             console.log('room => ' + JSON.stringify(room));
-
-
         }
     
         changeNumberHandler = (event) => {
