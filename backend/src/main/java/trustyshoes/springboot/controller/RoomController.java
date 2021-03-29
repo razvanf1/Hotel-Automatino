@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
-import trustyshoes.springboot.repository.RoomRepository;
 import trustyshoes.springboot.model.Room;
+import trustyshoes.springboot.repository.RoomRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,15 +30,13 @@ public class RoomController {
     }
 
     @PutMapping("/rooms/{nr}")
-    public ResponseEntity<Room> updateRoom(@PathVariable Integer roomNumber,@RequestBody Room room){
-        Integer id = roomRepository.findIdByNumber(roomNumber);
-        if (id==null) throw new ResourceAccessException("Room not found");
-        Room roomToUpdate = roomRepository.findById(id).get();
+    public ResponseEntity<Room> updateRoom(@PathVariable Integer nr, @RequestBody Room room){
+        Room roomToUpdate = roomRepository.findById(nr).get();
         roomToUpdate.setNumber(room.getNumber());
         roomToUpdate.setPrice(room.getPrice());
         roomToUpdate.setStatus(room.getStatus());
         roomToUpdate.setType(room.getStatus());
-        return ResponseEntity.ok(roomToUpdate);
+        return ResponseEntity.ok(roomRepository.save(roomToUpdate));
     }
 
 }

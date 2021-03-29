@@ -6,11 +6,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import trustyshoes.springboot.model.Room;
 
+import java.util.Optional;
+
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
-    @Query("SELECT r.id from rooms r where r.number = :number")
-    Integer findIdByNumber(@Param("number")Integer number);
-
 
 }
 
