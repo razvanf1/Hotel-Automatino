@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -15,7 +14,6 @@ import javax.validation.constraints.PositiveOrZero;
 @RequiredArgsConstructor
 @Data
 public class Room {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +25,7 @@ public class Room {
     private int status;
 
     @Column(name = "type")
-    @PositiveOrZero
-    @Max(2)
+
     private int type;
 
     @Column(name = "price")

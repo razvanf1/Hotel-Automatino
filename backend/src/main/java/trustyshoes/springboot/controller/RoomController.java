@@ -23,7 +23,8 @@ public class RoomController {
     }
 
     @PostMapping("/rooms")
-    public Room createRoom(@Valid @RequestBody Room room) {
+    public Room createRoom(@Valid @RequestBody Room room){
         return roomRepository.save(room);
     }
+
 }
