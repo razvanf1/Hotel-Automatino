@@ -32,7 +32,7 @@ public class AdminController {
             found = adminRepository.findByPhoneAndPassword(admin.getPhone(), admin.getPassword());
         }
         if(found!=null){
-            return ResponseEntity.ok(admin);
-        }else return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(found);
+        }else {return ResponseEntity.notFound().build();}
     }
 }
