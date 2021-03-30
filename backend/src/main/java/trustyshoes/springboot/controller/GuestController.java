@@ -21,4 +21,6 @@ public class GuestController {
     public List<Guest> getAllGuests(){
         return guestRepository.findAll();
     }
+
+
 }
