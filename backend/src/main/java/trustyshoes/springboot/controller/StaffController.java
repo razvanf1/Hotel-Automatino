@@ -1,10 +1,9 @@
 package trustyshoes.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import trustyshoes.springboot.model.Guest;
 import trustyshoes.springboot.model.Staff;
 import trustyshoes.springboot.repository.StaffRepository;
 
@@ -20,5 +19,18 @@ public class StaffController {
     @GetMapping("/staff")
     public List<Staff> getAllStaff() {
         return staffRepository.findAll();
+    }
+
+    @GetMapping("/staff/login")
+    public ResponseEntity<Staff> staffLogin(@RequestBody Staff staff){
+        Staff found = null;
+        if(staff.getPhone()==null) {
+            found = staffRepository.findByEmailAndPassword(staff.getEmail(), staff.getPassword());
+        }else if(staff.getEmail()==null){
+            found = staffRepository.findByPhoneAndPassword(staff.getPhone(), staff.getPassword());
+        }
+        if(found!=null){
+            return ResponseEntity.ok(staff);
+        }else return ResponseEntity.notFound().build();
     }
 }

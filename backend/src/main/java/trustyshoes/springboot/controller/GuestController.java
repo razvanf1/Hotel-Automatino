@@ -1,10 +1,9 @@
 package trustyshoes.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import trustyshoes.springboot.model.Admin;
 import trustyshoes.springboot.model.Guest;
 import trustyshoes.springboot.repository.GuestRepository;
 
@@ -20,5 +19,18 @@ public class GuestController {
     @GetMapping("/guests")
     public List<Guest> getAllGuests(){
         return guestRepository.findAll();
+    }
+
+    @GetMapping("/guests/login")
+    public ResponseEntity<Guest> guestLogin(@RequestBody Guest guest){
+        Guest found = null;
+        if(guest.getPhone()==null) {
+            found = guestRepository.findByEmailAndPassword(guest.getEmail(), guest.getPassword());
+        }else if(guest.getEmail()==null){
+            found = guestRepository.findByPhoneAndPassword(guest.getPhone(), guest.getPassword());
+        }
+        if(found!=null){
+            return ResponseEntity.ok(guest);
+        }else return ResponseEntity.notFound().build();
     }
 }
