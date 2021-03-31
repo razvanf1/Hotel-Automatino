@@ -10,7 +10,14 @@ class ListRoomComponent extends Component {
         }
         this.addRoom = this.addRoom.bind(this);
         this.editRoom = this.editRoom.bind(this);
+        this.deleteRoom = this.deleteRoom.bind(this);
 
+    }
+
+    deleteRoom(id){
+        RoomServices.deleteRoom(id).then( res => {
+            this.setState({rooms: this.state.rooms.filter(room => room.id !== id)});
+        });
     }
 
     editRoom(id){
@@ -30,10 +37,6 @@ class ListRoomComponent extends Component {
         return (
             <div>
                 <h2 className="text-center">Rooms List</h2>
-
-                <div className="row">
-                    <button className = "btn btn-primary" onClick={this.addRoom}>Add Room</button>
-                </div>
 
                 <div className = "row">
                         <table className = "table table-striped table-bordered">
@@ -57,8 +60,7 @@ class ListRoomComponent extends Component {
                                              <td> {room.price}</td>
                                              <td>
                                                  <button className ="btn btn-primary" onClick = { () => this.editRoom(room.id)} >Edit </button>
-                                                 <button  className="btn btn-danger" style={{marginLeft: "10px"}}>Delete </button>
-                                                 <button style={{marginLeft: "10px"}} className="btn btn-info">View </button>
+                                                 <button  className="btn btn-danger" onClick = { () => this.deleteRoom(room.id)} style={{marginLeft: "10px"}}>Delete </button>                                        
                                              </td>
                                         </tr>
                                     )
@@ -66,7 +68,11 @@ class ListRoomComponent extends Component {
                             </tbody>
                         </table>
 
-                 </div>
+                </div>
+                
+                <div className="row">
+                    <button className = "btn btn-primary" onClick={this.addRoom}>Add Room</button>
+                </div>
             
             </div>
         );
