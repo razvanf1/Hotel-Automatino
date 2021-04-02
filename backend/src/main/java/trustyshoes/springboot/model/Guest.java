@@ -32,9 +32,15 @@ public class Guest {
     @Column(name="password")
     private String password;
 
-    private Role role = Role.ROLE_GUEST;
+    private Role role;
 
-    public Role getRole() {
-        return role;
+    public Guest(int id, String firstName, String lastName, String email, String phone, String password, Role role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.role = Role.ROLE_GUEST;
     }
 }

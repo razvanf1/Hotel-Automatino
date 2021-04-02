@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "staff")
-@RequiredArgsConstructor
 @Data
 public class Staff {
 
@@ -30,9 +29,15 @@ public class Staff {
     @Column(name="password")
     private String password;
 
-    private Role role = Role.ROLE_STAFF;
+    private Role role;
 
-    public Role getRole() {
-        return role;
+    public Staff(int id, String firstName, String lastName, String email, String phone, String password, Role role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.role = Role.ROLE_STAFF;
     }
 }
