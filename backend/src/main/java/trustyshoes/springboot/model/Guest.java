@@ -5,10 +5,11 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="guests")
-@RequiredArgsConstructor
 @Data
 public class Guest {
 
@@ -30,4 +31,10 @@ public class Guest {
 
     @Column(name="password")
     private String password;
+
+    private Role role = Role.ROLE_GUEST;
+
+    public Role getRole() {
+        return role;
+    }
 }

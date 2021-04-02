@@ -28,4 +28,10 @@ public class Admin {
 
     @Column(name="password")
     private String password;
+
+    private Role role = Role.ROLE_ADMIN;
+
+    public Role getRole() {
+        return role;
+    }
 }

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import trustyshoes.springboot.model.Admin;
 import trustyshoes.springboot.model.Guest;
 
+import java.util.Optional;
+
 public interface GuestRepository extends JpaRepository<Guest,Integer> {
     @Query("SELECT g FROM Guest g WHERE g.phone = ?1 and g.password = ?2")
     Guest findByPhoneAndPassword(String phone, String password);
