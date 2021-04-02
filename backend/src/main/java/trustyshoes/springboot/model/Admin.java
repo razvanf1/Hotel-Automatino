@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "admins")
-@RequiredArgsConstructor
 @Data
 public class Admin {
     @Id
@@ -29,9 +28,15 @@ public class Admin {
     @Column(name="password")
     private String password;
 
-    private Role role = Role.ROLE_ADMIN;
+    private Role role;
 
-    public Role getRole() {
-        return role;
+    public Admin(int id, String firstName, String lastName, String email, String phone, String password, Role role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.role = Role.ROLE_ADMIN;
     }
 }
