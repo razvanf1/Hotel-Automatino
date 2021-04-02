@@ -2,17 +2,14 @@ package trustyshoes.springboot.model;
 
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name="guests")
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Guest {
 
     @Id

@@ -1,14 +1,13 @@
 package trustyshoes.springboot.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "admins")
-@Data
 public class Admin {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -31,18 +30,5 @@ public class Admin {
 
     private Role role;
 
-    public Admin()
-    {
-        this.role = Role.ROLE_ADMIN;
-    }
 
-    public Admin(int id, String firstName, String lastName, String email, String phone, String password, Role role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.role = Role.ROLE_ADMIN;
-    }
 }
