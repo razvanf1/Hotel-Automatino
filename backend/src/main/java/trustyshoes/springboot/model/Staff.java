@@ -30,4 +30,9 @@ public class Staff {
     @Column(name="password")
     private String password;
 
+    private Role role = Role.ROLE_STAFF;
+
+    public Role getRole() {
+        return role;
+    }
 }
