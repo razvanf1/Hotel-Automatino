@@ -3,42 +3,39 @@ import AdminServices from '../services/AdminService'
 
 class LoginComponent extends Component {
     constructor(props)
-        {
-            super(props)
-            this.state = {
-                email: '',
-                password: ''
-            }  
+    {
+        super(props)
+        this.state = {
+            email: '',
+            password: ''
+        }  
     
-            this.changeEmailHandler = this.changeEmailHandler.bind(this);
-            this.changePasswordHandler = this.changePasswordHandler.bind(this);
-            this.loginUser = this.loginUser.bind(this);
-        }
+        this.changeEmailHandler = this.changeEmailHandler.bind(this);
+        this.changePasswordHandler = this.changePasswordHandler.bind(this);
+        this.loginUser = this.loginUser.bind(this);
+    }
 
-        changeEmailHandler = (event) => {
-            this.setState({email: event.target.value});
-        }
+    changeEmailHandler = (event) => {
+        this.setState({email: event.target.value});
+    }
 
-        changePasswordHandler = (event) => {
-            this.setState({password: event.target.value});
-        }
+    changePasswordHandler = (event) => {
+        this.setState({password: event.target.value});
+    }
 
-        loginUser = (event) =>{
-            event.preventDefault();
-            let user = {email: this.state.email, password: this.state.password};
-            console.log('user => ' + JSON.stringify(user));
+    loginUser = (event) =>{
+        event.preventDefault();
+        let user = {email: this.state.email, password: this.state.password};
+        console.log('user => ' + JSON.stringify(user));
 
-            AdminServices.getAdmin(user).then((response) => {
-                localStorage.setItem("user-info", JSON.stringify(response));
-                this.props.history.push("/admin");
-                console.log(response);
-            }, (error) => {
-                console.log(error);
-            });
-
-            
-        }
-
+        AdminServices.getAdmin(user).then((response) => {
+            localStorage.setItem("user-info", JSON.stringify(response));
+            this.props.history.push("/admin");
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
+    }
 
     render() {
         return (

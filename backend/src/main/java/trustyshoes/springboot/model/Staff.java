@@ -1,6 +1,7 @@
 package trustyshoes.springboot.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -30,6 +31,11 @@ public class Staff {
     private String password;
 
     private Role role;
+
+    public Staff()
+    {
+        this.role = Role.ROLE_STAFF;
+    }
 
     public Staff(int id, String firstName, String lastName, String email, String phone, String password, Role role) {
         this.id = id;
