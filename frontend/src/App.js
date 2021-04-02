@@ -6,6 +6,7 @@ import HeaderComponent from './components/HeaderComponent';
 import ListRoomComponent from './components/ListRoomComponent'
 import CreateRoomComponent from './components/CreateRoomComponent';
 import UpdateRoomComponent from './components/UpdateRoomComponent';
+import StaffComponent from './components/StaffComponent';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path = "/admin" exact component = {ListRoomComponent}></Route>
                     <Route path = "/admin/add-room" component = {CreateRoomComponent}></Route>          
                     <Route path = "/admin/update-room/:id" component = {UpdateRoomComponent}></Route>     
+                    <Route path = "/staff" component={StaffComponent}></Route>
                   </Switch>
                 </div>
               <FooterComponent />
