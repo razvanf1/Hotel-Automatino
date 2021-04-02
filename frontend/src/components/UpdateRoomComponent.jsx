@@ -33,7 +33,7 @@ class UpdateRoomComponent extends Component {
         }
     
         editRoom = (event) => {
-            event.preventDefault()
+            event.preventDefault();
             let room = {number: this.state.number, type: this.state.type, price: this.state.price};
             console.log('room => ' + JSON.stringify(room));
             RoomService.updateRoom(room, this.state.id).then( res => {

@@ -10,9 +10,9 @@ import trustyshoes.springboot.repository.AdminRepository;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class AdminController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class AdminController {
         return adminRepository.findAll();
     }
 
-    @GetMapping("/admins/login")
+    @PostMapping("/admins/login")
     public ResponseEntity<Admin> adminLogin(@RequestBody Admin admin){
         Admin found = null;
         if(admin.getPhone()==null) {
