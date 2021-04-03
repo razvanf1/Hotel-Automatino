@@ -1,6 +1,7 @@
 package trustyshoes.springboot.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "staff")
 @Data
+@RequiredArgsConstructor
 public class Staff {
 
     @Id
@@ -29,15 +31,6 @@ public class Staff {
     @Column(name="password")
     private String password;
 
-    private Role role;
-
-    public Staff(int id, String firstName, String lastName, String email, String phone, String password, Role role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.password = password;
-        this.role = Role.ROLE_STAFF;
-    }
+    @Transient
+    private Role role = Role.ROLE_GUEST;
 }
