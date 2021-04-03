@@ -32,5 +32,9 @@ public class Staff {
     private String password;
 
     @Transient
+<<<<<<< HEAD
     private Role role = Role.ROLE_STAFF;
+=======
+    private Role role = Role.ROLE_GUEST;
+>>>>>>> 75f7388d2c42f4f265766381768523f6e2d73c29
 }
