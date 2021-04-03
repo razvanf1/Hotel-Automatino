@@ -1,15 +1,16 @@
 package trustyshoes.springboot.model;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "admins")
 @Data
 @RequiredArgsConstructor
+@Entity
+@Table(name = "admins")
+
 public class Admin {
 
 

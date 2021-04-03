@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Admin;
 import trustyshoes.springboot.model.Guest;
+import trustyshoes.springboot.model.Role;
 import trustyshoes.springboot.repository.GuestRepository;
 
 import java.util.List;
@@ -30,6 +31,7 @@ public class GuestController {
             found = guestRepository.findByPhoneAndPassword(guest.getPhone(), guest.getPassword());
         }
         if(found!=null){
+            found.setRole(Role.ROLE_GUEST);
             return ResponseEntity.ok(guest);
         }else return ResponseEntity.notFound().build();
     }

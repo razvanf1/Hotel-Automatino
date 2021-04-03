@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Guest;
+import trustyshoes.springboot.model.Role;
 import trustyshoes.springboot.model.Staff;
 import trustyshoes.springboot.repository.StaffRepository;
 
@@ -30,6 +31,7 @@ public class StaffController {
             found = staffRepository.findByPhoneAndPassword(staff.getPhone(), staff.getPassword());
         }
         if(found!=null){
+            found.setRole(Role.ROLE_STAFF);
             return ResponseEntity.ok(staff);
         }else return ResponseEntity.notFound().build();
     }

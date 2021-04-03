@@ -5,6 +5,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Admin;
+import trustyshoes.springboot.model.Role;
 import trustyshoes.springboot.repository.AdminRepository;
 
 import javax.validation.Valid;
@@ -32,6 +33,7 @@ public class AdminController {
             found = adminRepository.findByPhoneAndPassword(admin.getPhone(), admin.getPassword());
         }
         if(found!=null){
+            found.setRole(Role.ROLE_ADMIN);
             return ResponseEntity.ok(found);
         }else {return ResponseEntity.notFound().build();}
     }
