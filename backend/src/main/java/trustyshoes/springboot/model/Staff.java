@@ -32,5 +32,5 @@ public class Staff {
     private String password;
 
     @Transient
-    private Role role = Role.ROLE_GUEST
+    private Role role = Role.ROLE_STAFF;
 }

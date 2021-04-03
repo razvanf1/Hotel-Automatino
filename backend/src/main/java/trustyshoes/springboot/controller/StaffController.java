@@ -22,7 +22,7 @@ public class StaffController {
         return staffRepository.findAll();
     }
 
-    @GetMapping("/staff/login")
+    @PostMapping("/staff/login")
     public ResponseEntity<Staff> staffLogin(@RequestBody Staff staff){
         Staff found = null;
         if(staff.getPhone()==null) {
@@ -31,8 +31,7 @@ public class StaffController {
             found = staffRepository.findByPhoneAndPassword(staff.getPhone(), staff.getPassword());
         }
         if(found!=null){
-            found.setRole(Role.ROLE_STAFF);
-            return ResponseEntity.ok(staff);
+            return ResponseEntity.ok(found);
         }else return ResponseEntity.notFound().build();
     }
 }

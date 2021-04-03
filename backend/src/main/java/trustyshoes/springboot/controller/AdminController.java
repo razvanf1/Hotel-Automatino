@@ -33,7 +33,6 @@ public class AdminController {
             found = adminRepository.findByPhoneAndPassword(admin.getPhone(), admin.getPassword());
         }
         if(found!=null){
-            found.setRole(Role.ROLE_ADMIN);
             return ResponseEntity.ok(found);
         }else {return ResponseEntity.notFound().build();}
     }

@@ -22,7 +22,7 @@ public class GuestController {
         return guestRepository.findAll();
     }
 
-    @GetMapping("/guests/login")
+    @PostMapping("/guests/login")
     public ResponseEntity<Guest> guestLogin(@RequestBody Guest guest){
         Guest found = null;
         if(guest.getPhone()==null) {
@@ -31,8 +31,7 @@ public class GuestController {
             found = guestRepository.findByPhoneAndPassword(guest.getPhone(), guest.getPassword());
         }
         if(found!=null){
-            found.setRole(Role.ROLE_GUEST);
-            return ResponseEntity.ok(guest);
+            return ResponseEntity.ok(found);
         }else return ResponseEntity.notFound().build();
     }
 }
