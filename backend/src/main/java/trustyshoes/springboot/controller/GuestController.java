@@ -1,12 +1,15 @@
 package trustyshoes.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Admin;
 import trustyshoes.springboot.model.Guest;
 import trustyshoes.springboot.model.Role;
+import trustyshoes.springboot.model.Room;
 import trustyshoes.springboot.repository.GuestRepository;
+import trustyshoes.springboot.repository.RoomRepository;
 
 import java.util.List;
 
@@ -16,6 +19,9 @@ import java.util.List;
 public class GuestController {
     @Autowired
     private GuestRepository guestRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @GetMapping("/guests")
     public List<Guest> getAllGuests(){
@@ -33,5 +39,10 @@ public class GuestController {
         if(found!=null){
             return ResponseEntity.ok(found);
         }else return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/guests/search")
+    public List<Room> getAvailableRooms(@RequestParam String start, @RequestParam String end){
+        return roomRepository.findByReservationDate(start,end);
     }
 }
