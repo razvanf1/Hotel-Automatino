@@ -13,4 +13,6 @@ public interface GuestRepository extends JpaRepository<Guest,Integer> {
 
     @Query("SELECT g FROM Guest g WHERE g.email = ?1 and g.password = ?2")
     Guest findByEmailAndPassword(String email, String password);
+
+
 }
