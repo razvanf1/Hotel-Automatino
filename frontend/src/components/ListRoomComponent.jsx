@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RoomServices from '../services/RoomService'
+import LogOutButton from './LogOutButton';
 
 class ListRoomComponent extends Component {
     constructor(props){
@@ -71,7 +72,9 @@ class ListRoomComponent extends Component {
                 </div>
                 
                 <div className="row">
-                    <button className = "btn btn-primary" onClick={this.addRoom}>Add Room</button>
+                    <button className = "btn btn-primary" onClick={this.addRoom} style={{marginRight: "10px"}}>Add Room</button>
+                    <LogOutButton/>
+                    
                 </div>
             
             </div>

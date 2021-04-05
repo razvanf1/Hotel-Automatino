@@ -61,7 +61,6 @@ class UpdateRoomComponent extends Component {
             this.props.history.push('/admin');
         }
     
-    
         render() {
             return (
                 <div>

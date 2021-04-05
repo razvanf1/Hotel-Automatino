@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import LogOutButton from './LogOutButton';
 
-class StaffComponent extends Component {
+class GuestComponent extends Component {
     render() {
         return (
             <div>
                 <div className="row">
-                <h1>PAGINA PENTRU STAFF</h1>
+                <h1>PAGINA PENTRU GUEST</h1>
                 
                     <LogOutButton/>
                 </div>
@@ -15,4 +15,4 @@ class StaffComponent extends Component {
     }
 }
 
-export default StaffComponent;
+export default GuestComponent;
