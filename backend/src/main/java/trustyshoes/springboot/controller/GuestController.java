@@ -1,15 +1,18 @@
 package trustyshoes.springboot.controller;
 
-import org.json.JSONObject;
+import ch.qos.logback.core.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Guest;
+import trustyshoes.springboot.model.Reservation;
 import trustyshoes.springboot.model.Room;
 import trustyshoes.springboot.repository.GuestRepository;
 import trustyshoes.springboot.repository.ReservationRepository;
 import trustyshoes.springboot.repository.RoomRepository;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -67,4 +70,21 @@ public class GuestController {
         });
         return reply;
     }
+
+    @PutMapping("/guests/reservations/{id}")
+    public ResponseEntity checkIn(@PathVariable Integer id) {
+        Room roomToCheckIn = roomRepository.findById(roomRepository.findRoomIdFromReservation(id)).get();
+        Reservation currentReservation = reservationRepository.findById(id).get();
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+        if(currentTime.after(currentReservation.getStartDate()) && currentTime.before(currentReservation.getEndDate()))
+        {
+            roomToCheckIn.setStatus(1);
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
 }

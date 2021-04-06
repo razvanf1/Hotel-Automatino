@@ -17,5 +17,8 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
             "WHERE reservations.id is NULL OR reservations.endDate<=DATE(:startDate) OR reservations.startDate>=DATE(:endDate)")
     List<Room> findByReservationDate(String startDate, String endDate);
 
+    @Query(value = "SELECT rr.room_id FROM reservations_rooms rr, reservations r WHERE r.id = ?1 AND r.id = rr.reservation_id", nativeQuery = true)
+    int findRoomIdFromReservation(int reservationId);
+
 }
 
