@@ -60,7 +60,7 @@ class CreateRoomComponent extends Component {
                                     </div>
                                     <div className ="form-group">
                                         <label >Room Type: </label>
-                                        <input placeholder="Room Type" name="type" className="form-control" 
+                                        <input placeholder="Room Type" name="type" className="form-control date" 
                                             value={this.state.type} onChange={this.changeTypeHandler}/>
                                     </div>
                                     <div className ="form-group">

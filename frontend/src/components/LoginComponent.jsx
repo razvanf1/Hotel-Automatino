@@ -11,7 +11,6 @@ class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
-            logedIn: false
         }  
     
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
@@ -40,21 +39,22 @@ class LoginComponent extends Component {
         switch(role){
             case "admin":
                 AdminService.getAdmin(user).then(response => {
-                    authService.login('admin');
+                    console.log(response.data);
+                    authService.login(response.data.email, response.data.id, response.data.role);
                     this.props.history.push('/admin');                       
                 })
                 break;
             
             case "staff":
                 StaffService.getStaff(user).then(response => {
-                    authService.login('staff');
+                    authService.login(response.data.email, response.data.id, response.data.role);
                     this.props.history.push('/staff');
                 })
                 break;
 
             default:
                 GuestService.getGuest(user).then(response => {
-                    authService.login('guest');
+                    authService.login(response.data.email, response.data.id, response.data.role);
                     this.props.history.push('/guest');
                     console.log(authService.getRole());
                 })

@@ -6,6 +6,9 @@ class GuestServices{
     getGuest(user){
         return axios.post(GUEST_API_BASE_URL + "/login", user);
     }
+    getReservations(id){
+        return axios.get(GUEST_API_BASE_URL + "/reservations/" + id);
+    }
 
 }
 
