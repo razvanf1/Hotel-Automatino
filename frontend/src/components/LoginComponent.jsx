@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import AdminService from '../services/AdminService'
+import AdminService from '../services/AdminService';
 import GuestService from '../services/GuestService';
 import StaffService from '../services/StaffService';
+import auth         from '../services/AuthService';
 
 class LoginComponent extends Component {
     constructor(props)
@@ -31,26 +32,34 @@ class LoginComponent extends Component {
         let user = {email: this.state.email, password: this.state.password};
         console.log('user => ' + JSON.stringify(user));
 
+        let role = this.state.email.substring(this.state.email.indexOf('.')+1);
+        console.log('role => ' + role);
+
+        let authService = auth.getInstance();
         ////SE PUTEA SI MAI BINE
-        AdminService.getAdmin(user).then(response => {
-            localStorage.setItem("user-name", JSON.stringify(response.data.firstName));
-            localStorage.setItem("user-role", JSON.stringify(response.data.role));
-            this.props.history.push('/admin');
-        })
+        switch(role){
+            case "admin":
+                AdminService.getAdmin(user).then(response => {
+                    authService.login('admin');
+                    this.props.history.push('/admin');                       
+                })
+                break;
+            
+            case "staff":
+                StaffService.getStaff(user).then(response => {
+                    authService.login('staff');
+                    this.props.history.push('/staff');
+                })
+                break;
 
-        StaffService.getStaff(user).then(response => {
-            localStorage.setItem("user-name", JSON.stringify(response.data.firstName));
-            localStorage.setItem("user-role", JSON.stringify(response.data.role));
-            this.props.history.push('/staff');
-        })
-
-        GuestService.getGuest(user).then(response => {
-            localStorage.setItem("user-name", JSON.stringify(response.data.firstName));
-            localStorage.setItem("user-role", JSON.stringify(response.data.role));
-            this.props.history.push('/guest');
-        })
+            default:
+                GuestService.getGuest(user).then(response => {
+                    authService.login('guest');
+                    this.props.history.push('/guest');
+                    console.log(authService.getRole());
+                })
+        }   
     }
-
 
     render() {
             return (

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LogOutButton from './LogOutButton';
+import LogoutButton from './LogoutButton';
 
 class GuestComponent extends Component {
     render() {
@@ -8,7 +8,7 @@ class GuestComponent extends Component {
                 <div className="row">
                 <h1>PAGINA PENTRU GUEST</h1>
                 
-                    <LogOutButton/>
+                    <LogoutButton/>
                 </div>
             </div>
         );
