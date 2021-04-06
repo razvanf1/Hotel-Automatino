@@ -126,6 +126,12 @@ INSERT INTO `rooms` (`id`, `status`, `type`, `price`, `number`, `created_at`, `u
 (9, 0, 1, 239, 39, '2021-03-29 17:26:27', '2021-03-29 17:26:27'),
 (10, 1, 3, 330, 54, '2021-03-29 17:26:27', '2021-03-29 17:26:27');
 
+-- Date de test
+INSERT INTO RESERVATIONS (id, guest_id, start_date, end_date) VALUES
+(1, 1, DATE('2021.04.15 00:00:00'), DATE('2021.04.20 00:00:00'));
+
+INSERT INTO reservations_rooms (reservation_id, room_id) VALUES
+(1, 9);
 -- --------------------------------------------------------
 
 --
