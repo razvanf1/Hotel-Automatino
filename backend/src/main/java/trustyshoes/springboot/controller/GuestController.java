@@ -52,8 +52,8 @@ public class GuestController {
     }
 
     @GetMapping("/guests/search")
-    public List<Room> getAvailableRooms(@RequestParam String start, @RequestParam String end){
-        return roomRepository.findByReservationDate(start,end);
+    public List<Room> getAvailableRooms(@RequestParam String start, @RequestParam String end, @RequestParam int type){
+        return roomRepository.findByReservationDate(start,end,type);
     }
 
     @GetMapping("/guests/reservations/{id}")
@@ -86,5 +86,7 @@ public class GuestController {
 
         return ResponseEntity.badRequest().build();
     }
+
+
 
 }

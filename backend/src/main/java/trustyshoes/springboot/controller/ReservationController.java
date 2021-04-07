@@ -49,4 +49,9 @@ public class ReservationController {
         return reply;
     }
 
+    @DeleteMapping("guests/reservations/{id}")
+    public void deleteReservation(@PathVariable int reservationId){
+        reservationRepository.deleteById(reservationId);
+    }
+
 }
