@@ -5,27 +5,13 @@ import GuestService from '../services/GuestService';
 
 class GuestComponent extends Component{
 
+
     constructor(props){
-        super(props)
         let authService = auth.getInstance();
+        super(props)
         this.state = {
-            reservations: [
-            {
-                "number": 2,
-                "id": 1,
-                "type": 1,
-                "start": '24.06.2021',
-                "end": '30.06.2021'
-            },
-            {
-                "number": 3,
-                "id": 2,
-                "type": 3,
-                "start": '24.07.2021',
-                "end": '30.07.2021'
-            }
-            ],
-            id: authService.getId()      
+            reservations: [],
+            id: authService.getId()
         }
 
         this.addReservation = this.addReservation.bind(this);   
@@ -38,7 +24,9 @@ class GuestComponent extends Component{
     componentDidMount(){
         GuestService.getReservations(this.state.id).then((res) => {
             this.setState({reservations: res.data});
+            console.log("reservations => " + JSON.stringify(this.state.reservations));
         })
+       
     }
 
 
@@ -74,11 +62,11 @@ class GuestComponent extends Component{
                                 {
                                     this.state.reservations.map(
                                         reservation => 
-                                        <tr key = {reservation.id}>
-                                        <td> {reservation.number}</td>
-                                        <td> {reservation.type}</td>
-                                        <td> {reservation.start}</td>
-                                        <td> {reservation.end}</td>
+                                        <tr key = {reservation.roomId}>
+                                        <td> {reservation.roomNumber}</td>
+                                        <td> {reservation.roomType}</td>
+                                        <td> {reservation.startDate}</td>
+                                        <td> {reservation.endDate}</td>
                                         <td>
                                             <button className="btn btn-primary btn-sm" >Check-in/Check-out</button>
                                             <button className="btn btn-success btn-sm" style={{marginLeft: "10px"}}>Cancel/Open room</button>

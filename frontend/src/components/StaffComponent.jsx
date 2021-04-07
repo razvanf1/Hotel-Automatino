@@ -6,8 +6,7 @@ class StaffComponent extends Component {
         return (
             <div>
                 <div className="row">
-                <h1>PAGINA PENTRU STAFF</h1>
-                
+                <h1>PAGINA PENTRU STAFF</h1>              
                     <LogoutButton/>
                 </div>
             </div>

@@ -10,6 +10,11 @@ class GuestServices{
         return axios.get(GUEST_API_BASE_URL + "/reservations/" + id);
     }
 
+    searchRooms(reservation){
+        const params = new URLSearchParams(reservation);
+        return axios.get(GUEST_API_BASE_URL + '/search?' + params);
+    }
+
 }
 
 export default new GuestServices();

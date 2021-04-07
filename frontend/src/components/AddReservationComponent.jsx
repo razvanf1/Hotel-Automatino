@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import GuestService from '../services/GuestService';
 
 class AddReservationComponent extends Component {
     constructor(props)
         {
             super(props)
             this.state = {
+                disponibleRooms: [],
                 startDate: '',
                 endDate:'',
                 roomType:''
@@ -13,24 +15,36 @@ class AddReservationComponent extends Component {
             this.changeStartDateHandler = this.changeStartDateHandler.bind(this);
             this.changeEndDateHandler = this.changeEndDateHandler.bind(this);
             this.changeTypeHandler = this.changeTypeHandler.bind(this);
-            this.saveReservation = this.saveReservation.bind(this);
 
         }
 
-        saveReservation = (event) => {
-            //de facut ca am innebunit
+        searchReservations = (event) =>{
+            event.preventDefault();
+            let reservation = {start: this.state.startDate, end: this.state.endDate, type: this.state.roomType}
+            console.log('reservation => ' + JSON.stringify(reservation));
+            GuestService.searchRooms(reservation).then(res => {
+                this.setState({disponibleRooms: res.data}
+                )
+            })
         }
 
         changeStartDateHandler = (event) => {
-            this.setState({startDate: event.target.value});
+            this.setState({
+                disponibleRooms: [],
+                startDate: event.target.value
+            });   
         }
     
         changeEndDateHandler = (event) => {
-            this.setState({endDate: event.target.value});
+            this.setState({
+                disponibleRooms: [],
+                endDate: event.target.value});    
         }
     
         changeTypeHandler = (event) =>{
-            this.setState({type: event.target.value});
+            this.setState({
+                disponibleRooms: [],
+                roomType: event.target.value});      
         }
     
         cancel(){
@@ -60,10 +74,10 @@ class AddReservationComponent extends Component {
                                             <div className ="form-group">
                                                 <label> Room Type: </label>
                                                 <input placeholder="Room Type" name="type" className="form-control" 
-                                                    value={this.state.type} onChange={this.changeTypeHandler}/>
+                                                    value={this.state.roomType} onChange={this.changeTypeHandler}/>
                                             </div>
         
-                                            <button className="btn btn-success" onClick={this.saveReservation}>Search</button>
+                                            <button className="btn btn-success" onClick={this.searchReservations}>Search</button>
                                             <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                         </form>
                                     </div>
@@ -71,6 +85,40 @@ class AddReservationComponent extends Component {
                             </div>
                         </div>
                     </div>
+                
+                {this.state.disponibleRooms.length > 0 &&
+                    <div>
+                        <h2 className="text-center">Disponbile Rooms for selected dates</h2>
+                        <div className = "row">
+                                <table className = "table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th> Room Number</th>
+                                            <th> Room Type</th>
+                                            <th> Room Price</th>
+                                            <th> Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.state.disponibleRooms.map(
+                                                reservation => 
+                                                <tr key = {reservation.id}>
+                                                    <td> {reservation.number}</td>
+                                                    <td> {reservation.type} </td>   
+                                                    <td> {reservation.price}</td>
+                                                    <td>
+                                                        <button className ="btn btn-primary">Reserve </button>                                 
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
+                                    </tbody>
+                                </table>
+
+                        </div>
+                    </div>
+                }
                 </div>
             );
         }

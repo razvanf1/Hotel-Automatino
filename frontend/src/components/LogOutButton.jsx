@@ -7,7 +7,6 @@ class LogOutButton extends Component {
     logoutUser = (event) =>
     {
         let authService = auth.getInstance();
-        localStorage.clear();
         authService.logout();
     }
 
