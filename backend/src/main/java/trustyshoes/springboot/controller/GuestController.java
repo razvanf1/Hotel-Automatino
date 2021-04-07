@@ -82,7 +82,7 @@ public class GuestController {
         if(currentTime.after(currentReservation.getStartDate()) && currentTime.before(currentReservation.getEndDate()))
         {
             roomToCheckIn.setStatus(1);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(roomRepository.save(roomToCheckIn));
         }
 
         return ResponseEntity.badRequest().build();
@@ -99,7 +99,7 @@ public class GuestController {
         {
             roomToCheckOut.setStatus(0);
             reservationRepository.deleteById(currentReservation.getId());
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(roomRepository.save(roomToCheckOut));
         }
 
         return ResponseEntity.badRequest().build();

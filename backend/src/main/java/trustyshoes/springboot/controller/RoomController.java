@@ -46,9 +46,14 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/unlock/{id}")
-    public void unlockRoom(@PathVariable int id){
-        //toDo to be completed
-
+    public void unlockRoom(@PathVariable int id) throws InterruptedException {
+        Door door = doorRepository.findByRoomId(id);
+        System.out.println(door);
+        door.setStatus(1);
+        doorRepository.save(door);
+        Thread.sleep(15000);
+        door.setStatus(0);
+        doorRepository.save(door);
     }
 
     @PutMapping("/rooms/{id}")
@@ -61,12 +66,9 @@ public class RoomController {
         return ResponseEntity.ok(roomRepository.save(roomToUpdate));
     }
 
-
-
     @DeleteMapping("/rooms/{id}")
-    public void deleteRoom(@PathVariable Integer id){
+    public void deleteRoom(@PathVariable int id){
         roomRepository.delete(roomRepository.findById(id).get());
-        doorRepository.delete(doorRepository.findByRoomId(id));
     }
 
 }
