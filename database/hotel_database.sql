@@ -2,10 +2,10 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Gazdă: 127.0.0.1
--- Timp de generare: mart. 29, 2021 la 07:27 PM
--- Versiune server: 10.4.18-MariaDB
--- Versiune PHP: 8.0.3
+-- Host: 127.0.0.1
+-- Generation Time: Apr 07, 2021 at 08:31 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Bază de date: `hotel_database`
+-- Database: `hotel_database`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `admins`
+-- Table structure for table `admins`
 --
 
 CREATE TABLE `admins` (
@@ -39,19 +39,29 @@ CREATE TABLE `admins` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Eliminarea datelor din tabel `admins`
+-- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Ion ', 'Alexandrescu', 'alexandrescu.ion@gmail.com', '0732532432', 'IONalexandrescu14', '2021-03-29 17:19:45', '2021-03-29 17:19:45'),
 (2, 'Vasile', 'Cimpoi', 'cimp.vasi@yahoo.com', '0749325943', 'cimp@VASI', '2021-03-29 17:19:45', '2021-03-29 17:19:45');
-INSERT INTO `admins` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
- (3, 'Alexandru', 'Mihai', 'admin@trustyshoes.admin', NULL, 'admin123', current_timestamp(), current_timestamp());
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `guests`
+-- Table structure for table `doors`
+--
+
+CREATE TABLE `doors` (
+  `id` int(11) NOT NULL,
+  `room_id` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guests`
 --
 
 CREATE TABLE `guests` (
@@ -66,19 +76,17 @@ CREATE TABLE `guests` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Eliminarea datelor din tabel `guests`
+-- Dumping data for table `guests`
 --
 
 INSERT INTO `guests` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Kilian ', 'Mbappe', 'kill.Mbappe@gmail.com', '0732532433', 'vreauLAreal', '2021-03-29 17:23:02', '2021-03-29 17:23:02'),
 (2, 'Alexandru', 'Zimnicea', 'al_zimnicea20@yahoo.com', '0765232301', 'Zimnicea20_AL', '2021-03-29 17:23:02', '2021-03-29 17:23:02');
-INSERT INTO `guests` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
- (3, 'Razvan', 'Petrescu', 'guest@gmail.com', NULL, 'guest123', current_timestamp(), current_timestamp());
 
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `reservations`
+-- Table structure for table `reservations`
 --
 
 CREATE TABLE `reservations` (
@@ -90,10 +98,18 @@ CREATE TABLE `reservations` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `reservations`
+--
+
+INSERT INTO `reservations` (`id`, `guest_id`, `start_date`, `end_date`, `created_at`, `updated_at`) VALUES
+(1, 1, '2021-04-01 10:16:47', '2021-04-06 10:16:47', '2021-04-05 10:17:19', '2021-04-05 10:17:19'),
+(2, 1, '2021-04-21 10:17:32', '2021-04-23 10:17:32', '2021-04-05 10:17:46', '2021-04-05 10:17:46');
+
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `reservations_rooms`
+-- Table structure for table `reservations_rooms`
 --
 
 CREATE TABLE `reservations_rooms` (
@@ -102,10 +118,18 @@ CREATE TABLE `reservations_rooms` (
   `reservation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `reservations_rooms`
+--
+
+INSERT INTO `reservations_rooms` (`id`, `room_id`, `reservation_id`) VALUES
+(1, 9, 1),
+(2, 10, 2);
+
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `rooms`
+-- Table structure for table `rooms`
 --
 
 CREATE TABLE `rooms` (
@@ -119,23 +143,17 @@ CREATE TABLE `rooms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Eliminarea datelor din tabel `rooms`
+-- Dumping data for table `rooms`
 --
 
 INSERT INTO `rooms` (`id`, `status`, `type`, `price`, `number`, `created_at`, `updated_at`) VALUES
 (9, 0, 1, 239, 39, '2021-03-29 17:26:27', '2021-03-29 17:26:27'),
 (10, 1, 3, 330, 54, '2021-03-29 17:26:27', '2021-03-29 17:26:27');
 
--- Date de test
-INSERT INTO RESERVATIONS (id, guest_id, start_date, end_date) VALUES
-(1, 1, DATE('2021.04.15 00:00:00'), DATE('2021.04.20 00:00:00'));
-
-INSERT INTO reservations_rooms (reservation_id, room_id) VALUES
-(1, 9);
 -- --------------------------------------------------------
 
 --
--- Structură tabel pentru tabel `staff`
+-- Table structure for table `staff`
 --
 
 CREATE TABLE `staff` (
@@ -150,40 +168,45 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Eliminarea datelor din tabel `staff`
+-- Dumping data for table `staff`
 --
 
 INSERT INTO `staff` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'David', 'Buciuclevisoschi', 'buciu.david1994@yahoo.ro', '0759323232', 'mamatata234', '2021-03-29 17:25:12', '2021-03-29 17:25:12'),
 (2, 'Erica', 'Dostoievschi', 'erica.frumi@gmail.com', '0744222333', 'maucideea2012', '2021-03-29 17:25:12', '2021-03-29 17:25:12');
-INSERT INTO `staff` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
- (3, 'Mihai', 'Popescu', 'staff@trustyshoes.staff', NULL, 'staff123', current_timestamp(), current_timestamp());
 
 --
--- Indexuri pentru tabele eliminate
+-- Indexes for dumped tables
 --
 
 --
--- Indexuri pentru tabele `admins`
+-- Indexes for table `admins`
 --
 ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `guests`
+-- Indexes for table `doors`
+--
+ALTER TABLE `doors`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `room_id` (`room_id`);
+
+--
+-- Indexes for table `guests`
 --
 ALTER TABLE `guests`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexuri pentru tabele `reservations`
+-- Indexes for table `reservations`
 --
 ALTER TABLE `reservations`
   ADD PRIMARY KEY (`id`),
   ADD KEY `guest_id` (`guest_id`);
 
 --
--- Indexuri pentru tabele `reservations_rooms`
+-- Indexes for table `reservations_rooms`
 --
 ALTER TABLE `reservations_rooms`
   ADD PRIMARY KEY (`id`),
@@ -191,70 +214,82 @@ ALTER TABLE `reservations_rooms`
   ADD KEY `room_id` (`room_id`);
 
 --
--- Indexuri pentru tabele `rooms`
+-- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `number` (`number`);
 
 --
--- Indexuri pentru tabele `staff`
+-- Indexes for table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pentru tabele eliminate
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pentru tabele `admins`
+-- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pentru tabele `guests`
+-- AUTO_INCREMENT for table `doors`
+--
+ALTER TABLE `doors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `guests`
 --
 ALTER TABLE `guests`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pentru tabele `reservations`
+-- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pentru tabele `reservations_rooms`
+-- AUTO_INCREMENT for table `reservations_rooms`
 --
 ALTER TABLE `reservations_rooms`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT pentru tabele `rooms`
+-- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT pentru tabele `staff`
+-- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constrângeri pentru tabele eliminate
+-- Constraints for dumped tables
 --
 
 --
--- Constrângeri pentru tabele `reservations`
+-- Constraints for table `doors`
+--
+ALTER TABLE `doors`
+  ADD CONSTRAINT `doors_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `reservations`
 --
 ALTER TABLE `reservations`
   ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`guest_id`) REFERENCES `guests` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constrângeri pentru tabele `reservations_rooms`
+-- Constraints for table `reservations_rooms`
 --
 ALTER TABLE `reservations_rooms`
   ADD CONSTRAINT `reservations_rooms_ibfk_1` FOREIGN KEY (`reservation_id`) REFERENCES `reservations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,

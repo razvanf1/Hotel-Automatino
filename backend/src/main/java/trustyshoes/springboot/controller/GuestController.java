@@ -88,9 +88,6 @@ public class GuestController {
         return ResponseEntity.badRequest().build();
     }
 
-<<<<<<< Updated upstream
-
-=======
     @PutMapping("/guests/reservations/checkout/{id}")
     public ResponseEntity checkOut(@PathVariable Integer id) {
         Room roomToCheckOut = roomRepository.findById(roomRepository.findRoomIdFromReservation(id)).get();
@@ -107,6 +104,5 @@ public class GuestController {
 
         return ResponseEntity.badRequest().build();
     }
->>>>>>> Stashed changes
 
 }
