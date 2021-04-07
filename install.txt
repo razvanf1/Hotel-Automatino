@@ -1,4 +1,4 @@
-1. Install XAMPP
+1. Install XAMPP, install NodeJS, install Java 8+
 2. Start XAMPP: start Apache Server and phpMyAdmin
 3. Create hotel_database
 4. Import hotel_database.db script from database folder
