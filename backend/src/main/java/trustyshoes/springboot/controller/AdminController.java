@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Admin;
 import trustyshoes.springboot.model.Role;
+import trustyshoes.springboot.model.SendEmailService;
 import trustyshoes.springboot.repository.AdminRepository;
 
 import javax.validation.Valid;
@@ -18,6 +19,9 @@ public class AdminController {
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private SendEmailService sendEmailService;
 
     @GetMapping("/admins")
     public List<Admin> getAllAdmins(){
@@ -35,5 +39,10 @@ public class AdminController {
         if(found!=null){
             return ResponseEntity.ok(found);
         }else {return ResponseEntity.notFound().build();}
+    }
+
+    @PostMapping("/admins/sendoffers")
+    public void sendOffers() {
+        sendEmailService.sendEmail("razvan.frunza@student.usv.ro", "Puiule, nu rata aceasta mega tzeaca! O camera la pret de 2.", "Hotel TrustyShoes");
     }
 }
