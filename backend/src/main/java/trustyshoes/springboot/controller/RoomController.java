@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
+import trustyshoes.springboot.model.Door;
 import trustyshoes.springboot.model.Room;
+import trustyshoes.springboot.repository.DoorRepository;
 import trustyshoes.springboot.repository.RoomRepository;
 
 import javax.validation.Valid;
@@ -17,6 +19,10 @@ public class RoomController {
 
     @Autowired
     private RoomRepository roomRepository;
+
+
+    @Autowired
+    private DoorRepository doorRepository;
 
     //get all rooms
     @GetMapping("/rooms")
@@ -31,7 +37,12 @@ public class RoomController {
 
     @PostMapping("/rooms")
     public Room createRoom(@Valid @RequestBody Room room){
-        return roomRepository.save(room);
+        Room addedRoom = roomRepository.save(room);
+        Door door = new Door();
+        door.setStatus(0);
+        door.setRoomId(addedRoom.getId());
+        doorRepository.save(door);
+        return addedRoom;
     }
 
     @GetMapping("/rooms/unlock/{id}")
@@ -55,6 +66,7 @@ public class RoomController {
     @DeleteMapping("/rooms/{id}")
     public void deleteRoom(@PathVariable Integer id){
         roomRepository.delete(roomRepository.findById(id).get());
+        doorRepository.delete(doorRepository.findByRoomId(id));
     }
 
 }
