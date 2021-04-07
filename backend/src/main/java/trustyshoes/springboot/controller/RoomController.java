@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
+import trustyshoes.springboot.model.Door;
 import trustyshoes.springboot.model.Room;
+import trustyshoes.springboot.repository.DoorRepository;
 import trustyshoes.springboot.repository.RoomRepository;
 
 import javax.validation.Valid;
@@ -17,6 +19,10 @@ public class RoomController {
 
     @Autowired
     private RoomRepository roomRepository;
+
+
+    @Autowired
+    private DoorRepository doorRepository;
 
     //get all rooms
     @GetMapping("/rooms")
@@ -31,13 +37,23 @@ public class RoomController {
 
     @PostMapping("/rooms")
     public Room createRoom(@Valid @RequestBody Room room){
-        return roomRepository.save(room);
+        Room addedRoom = roomRepository.save(room);
+        Door door = new Door();
+        door.setStatus(0);
+        door.setRoomId(addedRoom.getId());
+        doorRepository.save(door);
+        return addedRoom;
     }
 
     @GetMapping("/rooms/unlock/{id}")
-    public void unlockRoom(@PathVariable int id){
-        //toDo to be completed
-
+    public void unlockRoom(@PathVariable int id) throws InterruptedException {
+        Door door = doorRepository.findByRoomId(id);
+        System.out.println(door);
+        door.setStatus(1);
+        doorRepository.save(door);
+        Thread.sleep(15000);
+        door.setStatus(0);
+        doorRepository.save(door);
     }
 
     @PutMapping("/rooms/{id}")
@@ -50,10 +66,8 @@ public class RoomController {
         return ResponseEntity.ok(roomRepository.save(roomToUpdate));
     }
 
-
-
     @DeleteMapping("/rooms/{id}")
-    public void deleteRoom(@PathVariable Integer id){
+    public void deleteRoom(@PathVariable int id){
         roomRepository.delete(roomRepository.findById(id).get());
     }
 
