@@ -88,6 +88,25 @@ public class GuestController {
         return ResponseEntity.badRequest().build();
     }
 
+<<<<<<< Updated upstream
 
+=======
+    @PutMapping("/guests/reservations/checkout/{id}")
+    public ResponseEntity checkOut(@PathVariable Integer id) {
+        Room roomToCheckOut = roomRepository.findById(roomRepository.findRoomIdFromReservation(id)).get();
+        Reservation currentReservation = reservationRepository.findById(id).get();
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+        if(currentTime.after(currentReservation.getStartDate()) && currentTime.before(currentReservation.getEndDate()))
+        {
+            roomToCheckOut.setStatus(0);
+            reservationRepository.deleteById(currentReservation.getId());
+            return ResponseEntity.ok().build();
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+>>>>>>> Stashed changes
 
 }
