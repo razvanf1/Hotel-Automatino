@@ -37,7 +37,7 @@ public class RoomController {
     @GetMapping("/rooms/unlock/{id}")
     public void unlockRoom(@PathVariable int id){
         //toDo to be completed
-        
+
     }
 
     @PutMapping("/rooms/{id}")
@@ -49,6 +49,8 @@ public class RoomController {
         roomToUpdate.setType(room.getStatus());
         return ResponseEntity.ok(roomRepository.save(roomToUpdate));
     }
+
+
 
     @DeleteMapping("/rooms/{id}")
     public void deleteRoom(@PathVariable Integer id){
