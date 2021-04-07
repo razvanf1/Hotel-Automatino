@@ -1,0 +1,9 @@
+1. Install XAMPP
+2. Start XAMPP: start Apache Server and phpMyAdmin
+3. Create hotel_database
+4. Import hotel_database.db script from database folder
+5. Open frontend with VSCode
+6. Open backend with Java IDE (e.g. IntelliJ)
+7. Start backend project
+8. Start frontend project :cmd into frontend: - npm intsall
+		      			      - npm start
