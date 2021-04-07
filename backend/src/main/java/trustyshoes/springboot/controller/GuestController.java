@@ -66,6 +66,7 @@ public class GuestController {
             map.put("endDate",objects[1]);
             map.put("roomNumber",objects[2]);
             map.put("roomType",objects[3]);
+            map.put("roomId",objects[4]);
             reply.add(map);
         });
         return reply;

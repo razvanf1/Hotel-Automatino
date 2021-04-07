@@ -34,6 +34,12 @@ public class RoomController {
         return roomRepository.save(room);
     }
 
+    @GetMapping("/rooms/unlock/{id}")
+    public void unlockRoom(@PathVariable int id){
+        //toDo to be completed
+        
+    }
+
     @PutMapping("/rooms/{id}")
     public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @RequestBody Room room){
         Room roomToUpdate = roomRepository.findById(id).get();
