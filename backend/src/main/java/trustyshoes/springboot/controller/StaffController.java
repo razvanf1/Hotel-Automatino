@@ -3,8 +3,6 @@ package trustyshoes.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import trustyshoes.springboot.model.Guest;
-import trustyshoes.springboot.model.Role;
 import trustyshoes.springboot.model.Staff;
 import trustyshoes.springboot.repository.StaffRepository;
 

@@ -28,7 +28,7 @@ public class ReservationController {
         return reservationRepository.findAll();
     }
 
-    @PostMapping("/reservations")
+    @PostMapping("/guests/reservations")
     public Map<String,Object> addReservation(@RequestParam int guestId, @RequestParam int roomId,
                                              @RequestParam String startDate, @RequestParam String endDate){
         Map<String,Object> reply = new HashMap<>();
@@ -49,7 +49,7 @@ public class ReservationController {
         return reply;
     }
 
-    @DeleteMapping("/reservations/{id}")
+    @DeleteMapping("/guests/reservations/{id}")
     public void deleteReservation(@PathVariable int id){
         reservationRepository.deleteById(id);
     }

@@ -1,15 +1,12 @@
 package trustyshoes.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Admin;
-import trustyshoes.springboot.model.Role;
 import trustyshoes.springboot.model.SendEmailService;
 import trustyshoes.springboot.repository.AdminRepository;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")

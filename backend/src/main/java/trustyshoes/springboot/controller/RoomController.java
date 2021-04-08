@@ -3,7 +3,6 @@ package trustyshoes.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 import trustyshoes.springboot.model.Door;
 import trustyshoes.springboot.model.Room;
 import trustyshoes.springboot.repository.DoorRepository;
@@ -57,7 +56,7 @@ public class RoomController {
     }
 
     @PutMapping("/rooms/{id}")
-    public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @RequestBody Room room){
+    public ResponseEntity<Room> updateRoom(@PathVariable Integer id, @Valid @RequestBody Room room){
         Room roomToUpdate = roomRepository.findById(id).get();
         roomToUpdate.setNumber(room.getNumber());
         roomToUpdate.setPrice(room.getPrice());

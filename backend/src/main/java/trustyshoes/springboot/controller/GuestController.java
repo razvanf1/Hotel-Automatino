@@ -1,6 +1,5 @@
 package trustyshoes.springboot.controller;
 
-import ch.qos.logback.core.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,10 @@ import trustyshoes.springboot.repository.ReservationRepository;
 import trustyshoes.springboot.repository.RoomRepository;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController

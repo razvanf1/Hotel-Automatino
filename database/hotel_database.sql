@@ -44,7 +44,8 @@ CREATE TABLE `admins` (
 
 INSERT INTO `admins` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Ion ', 'Alexandrescu', 'alexandrescu.ion@gmail.com', '0732532432', 'IONalexandrescu14', '2021-03-29 17:19:45', '2021-03-29 17:19:45'),
-(2, 'Vasile', 'Cimpoi', 'cimp.vasi@yahoo.com', '0749325943', 'cimp@VASI', '2021-03-29 17:19:45', '2021-03-29 17:19:45');
+(2, 'Vasile', 'Cimpoi', 'cimp.vasi@yahoo.com', '0749325943', 'cimp@VASI', '2021-03-29 17:19:45', '2021-03-29 17:19:45'),
+(3, 'George', 'Administrator', 'admin@trustyshoes.admin', NULL, 'admin123', current_timestamp(), current_timestamp());
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,8 @@ CREATE TABLE `guests` (
 
 INSERT INTO `guests` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Kilian ', 'Mbappe', 'kill.Mbappe@gmail.com', '0732532433', 'vreauLAreal', '2021-03-29 17:23:02', '2021-03-29 17:23:02'),
-(2, 'Alexandru', 'Zimnicea', 'al_zimnicea20@yahoo.com', '0765232301', 'Zimnicea20_AL', '2021-03-29 17:23:02', '2021-03-29 17:23:02');
+(2, 'Alexandru', 'Zimnicea', 'al_zimnicea20@yahoo.com', '0765232301', 'Zimnicea20_AL', '2021-03-29 17:23:02', '2021-03-29 17:23:02'),
+(3, 'Mihai', 'Petrea', 'guest@gmail.com', NULL, 'guest123', current_timestamp(), current_timestamp());
 
 -- --------------------------------------------------------
 
@@ -174,7 +176,8 @@ CREATE TABLE `staff` (
 
 INSERT INTO `staff` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'David', 'Buciuclevisoschi', 'buciu.david1994@yahoo.ro', '0759323232', 'mamatata234', '2021-03-29 17:25:12', '2021-03-29 17:25:12'),
-(2, 'Erica', 'Dostoievschi', 'erica.frumi@gmail.com', '0744222333', 'maucideea2012', '2021-03-29 17:25:12', '2021-03-29 17:25:12');
+(2, 'Erica', 'Dostoievschi', 'erica.frumi@gmail.com', '0744222333', 'maucideea2012', '2021-03-29 17:25:12', '2021-03-29 17:25:12'),
+(3, 'Robert', 'Curatenie', 'staff@trustyshoes.staff', NULL, 'staff123', current_timestamp(), current_timestamp());
 
 --
 -- Indexes for dumped tables
