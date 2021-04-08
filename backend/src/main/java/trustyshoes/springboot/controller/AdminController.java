@@ -8,6 +8,7 @@ import trustyshoes.springboot.model.Admin;
 import trustyshoes.springboot.model.Role;
 import trustyshoes.springboot.model.SendEmailService;
 import trustyshoes.springboot.repository.AdminRepository;
+import trustyshoes.springboot.repository.GuestRepository;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -19,6 +20,9 @@ public class AdminController {
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private GuestRepository guestRepository;
 
     @Autowired
     private SendEmailService sendEmailService;
@@ -42,7 +46,10 @@ public class AdminController {
     }
 
     @PostMapping("/admins/sendoffers")
-    public void sendOffers() {
-        sendEmailService.sendEmail("razvan.frunza@student.usv.ro", "Puiule, nu rata aceasta mega tzeaca! O camera la pret de 2.", "Hotel TrustyShoes");
+    public void sendOffers(@RequestParam String mailTopic, @RequestParam String mailBody) {
+        for(int i = 1; i <= guestRepository.count(); i++) {
+            sendEmailService.sendEmail(guestRepository.getOne(i).getEmail(), mailBody, mailTopic);
+        }
     }
+
 }
