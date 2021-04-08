@@ -1,6 +1,7 @@
 package trustyshoes.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Reservation;
 import trustyshoes.springboot.model.ReservationRoom;
@@ -29,24 +30,34 @@ public class ReservationController {
     }
 
     @PostMapping("/guests/reservations")
-    public Map<String,Object> addReservation(@RequestParam int guestId, @RequestParam int roomId,
+    public ResponseEntity addReservation(@RequestParam int guestId, @RequestParam int roomId,
                                              @RequestParam String startDate, @RequestParam String endDate){
-        Map<String,Object> reply = new HashMap<>();
-        Reservation reservation = new Reservation();
-        reservation.setGuestId(guestId);
-        reservation.setEndDate(Timestamp.valueOf(endDate.replace(".","-")+" 00:00:00"));
-        reservation.setStartDate(Timestamp.valueOf(startDate.replace(".","-")+" 00:00:00"));
-        Reservation added = reservationRepository.save(reservation);
-        ReservationRoom reservationRoom = new ReservationRoom();
-        reservationRoom.setReservationId(reservation.getId());
-        reservationRoom.setRoomId(roomId);
-        ReservationRoom addedRR = reservationRoomRepository.save(reservationRoom);
-        reply.put("reservationId",added.getId());
-        reply.put("guestId",added.getGuestId());
-        reply.put("startDate",startDate);
-        reply.put("endDate",endDate);
-        reply.put("roomId",addedRR.getRoomId());
-        return reply;
+
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+        Timestamp startDateTimestamp = Timestamp.valueOf(startDate.replace(".","-")+" 00:00:00");
+        Timestamp endDateTimestamp = Timestamp.valueOf(endDate.replace(".","-")+" 00:00:00");
+
+        if(startDateTimestamp.before(currentTime) || endDateTimestamp.before(startDateTimestamp))
+            return ResponseEntity.badRequest().build();
+        
+        else {
+            Map<String,Object> reply = new HashMap<>();
+            Reservation reservation = new Reservation();
+            reservation.setGuestId(guestId);
+            reservation.setEndDate(endDateTimestamp);
+            reservation.setStartDate(startDateTimestamp);
+            Reservation added = reservationRepository.save(reservation);
+            ReservationRoom reservationRoom = new ReservationRoom();
+            reservationRoom.setReservationId(reservation.getId());
+            reservationRoom.setRoomId(roomId);
+            ReservationRoom addedRR = reservationRoomRepository.save(reservationRoom);
+            reply.put("reservationId",added.getId());
+            reply.put("guestId",added.getGuestId());
+            reply.put("startDate",startDate);
+            reply.put("endDate",endDate);
+            reply.put("roomId",addedRR.getRoomId());
+            return ResponseEntity.ok(reply);
+        }
     }
 
     @DeleteMapping("/guests/reservations/{id}")
