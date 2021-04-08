@@ -3,7 +3,9 @@ package trustyshoes.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import trustyshoes.springboot.model.Room;
 import trustyshoes.springboot.model.Staff;
+import trustyshoes.springboot.repository.RoomRepository;
 import trustyshoes.springboot.repository.StaffRepository;
 
 import java.util.List;
@@ -14,6 +16,9 @@ import java.util.List;
 public class StaffController {
     @Autowired
     private StaffRepository staffRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @GetMapping("/staff")
     public List<Staff> getAllStaff() {
@@ -31,5 +36,10 @@ public class StaffController {
         if(found!=null){
             return ResponseEntity.ok(found);
         }else return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("staff/rooms")
+    public List<Room> getRooms () {
+        return roomRepository.findAll();
     }
 }

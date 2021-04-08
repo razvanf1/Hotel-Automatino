@@ -73,6 +73,7 @@ public class GuestController {
             map.put("roomType",objects[3]);
             map.put("roomId",objects[4]);
             map.put("reservationId",objects[5]);
+            map.put("roomStatus", objects[6]);
             reply.add(map);
         });
         return reply;
