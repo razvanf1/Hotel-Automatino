@@ -32,6 +32,8 @@ class GuestComponent extends Component{
 
     render() {
         let authService = auth.getInstance();
+        const currentDate = new Date().toJSON().slice(0,10).replace(/-/g,'-');
+        console.log('curent date =>' + currentDate);
         return (
             <div>
                 <div className="container">
@@ -68,8 +70,21 @@ class GuestComponent extends Component{
                                         <td> {reservation.startDate}</td>
                                         <td> {reservation.endDate}</td>
                                         <td>
-                                            <button className="btn btn-primary btn-sm" >Check-in/Check-out</button>
-                                            <button className="btn btn-success btn-sm" style={{marginLeft: "10px"}}>Cancel/Open room</button>
+                                            {currentDate === reservation.startDate ?
+                                            <button className="btn btn-primary btn-sm" >
+                                                Check-out
+                                            </button>
+                                            :
+                                            <button className="btn btn-primary btn-sm" >
+                                                Check-in
+                                            </button>
+                                            }
+                                            {currentDate === reservation.startDate ?
+                                            <button className="btn btn-success btn-sm" style={{marginLeft: "10px"}}>Open room</button>
+                                            :
+                                            <button className="btn btn-success btn-sm" style={{marginLeft: "10px"}}>Cancel</button>
+                                            }
+                                           
                                         </td>
                                     </tr>
                                     )
@@ -80,7 +95,7 @@ class GuestComponent extends Component{
                 </div>
 
                 <div className="row">
-                    <h2> Active room:</h2>
+                    <h2>Active room:</h2>
                 </div>
 
                 <div className="row">

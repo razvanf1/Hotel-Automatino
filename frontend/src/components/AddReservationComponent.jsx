@@ -1,30 +1,47 @@
 import React, { Component } from 'react';
 import GuestService from '../services/GuestService';
+import auth    from '../services/AuthService';
 
 class AddReservationComponent extends Component {
     constructor(props)
         {
             super(props)
+            let authService = auth.getInstance();
             this.state = {
                 disponibleRooms: [],
                 startDate: '',
                 endDate:'',
-                roomType:''
+                roomType:'',
+                guestId: authService.getId()
             }  
     
             this.changeStartDateHandler = this.changeStartDateHandler.bind(this);
             this.changeEndDateHandler = this.changeEndDateHandler.bind(this);
             this.changeTypeHandler = this.changeTypeHandler.bind(this);
+            this.saveReservation = this.saveReservation.bind(this);
 
         }
 
-        searchReservations = (event) =>{
+        searchRooms = (event) => {
             event.preventDefault();
             let reservation = {start: this.state.startDate, end: this.state.endDate, type: this.state.roomType}
             console.log('reservation => ' + JSON.stringify(reservation));
             GuestService.searchRooms(reservation).then(res => {
                 this.setState({disponibleRooms: res.data}
                 )
+            })
+        }
+
+        saveReservation(_startDate, _endDate, _roomId, _guestId){
+            let reservation = {
+                startDate: _startDate, 
+                endDate: _endDate, 
+                roomId: _roomId, 
+                guestId: _guestId
+            }
+            GuestService.addReservation(reservation).then(res => {
+                console.log('add res res => ' + JSON.stringify(res));
+                this.props.history.push('/guest');
             })
         }
 
@@ -77,7 +94,7 @@ class AddReservationComponent extends Component {
                                                     value={this.state.roomType} onChange={this.changeTypeHandler}/>
                                             </div>
         
-                                            <button className="btn btn-success" onClick={this.searchReservations}>Search</button>
+                                            <button className="btn btn-success" onClick={this.searchRooms}>Search</button>
                                             <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                         </form>
                                     </div>
@@ -102,20 +119,19 @@ class AddReservationComponent extends Component {
                                     <tbody>
                                         {
                                             this.state.disponibleRooms.map(
-                                                reservation => 
-                                                <tr key = {reservation.id}>
-                                                    <td> {reservation.number}</td>
-                                                    <td> {reservation.type} </td>   
-                                                    <td> {reservation.price}</td>
+                                                room => 
+                                                <tr key = {room.id}>
+                                                    <td> {room.number}</td>
+                                                    <td> {room.type} </td>   
+                                                    <td> {room.price}</td>
                                                     <td>
-                                                        <button className ="btn btn-primary">Reserve </button>                                 
+                                                        <button className ="btn btn-primary" onClick={() => this.saveReservation(this.state.startDate, this.state.endDate, room.id, this.state.guestId)}>Reserve</button>                                 
                                                     </td>
                                                 </tr>
                                             )
                                         }
                                     </tbody>
                                 </table>
-
                         </div>
                     </div>
                 }
