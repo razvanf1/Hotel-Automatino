@@ -3,6 +3,7 @@ package trustyshoes.springboot.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import trustyshoes.springboot.model.Room;
 import trustyshoes.springboot.model.Staff;
 import trustyshoes.springboot.repository.StaffRepository;
 
@@ -32,4 +33,9 @@ public class StaffController {
             return ResponseEntity.ok(found);
         }else return ResponseEntity.notFound().build();
     }
+
+    //@GetMapping("staff/rooms")
+   //public List<Room> getRoomsStatus () {
+
+   // }
 }
