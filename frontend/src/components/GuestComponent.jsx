@@ -14,11 +14,18 @@ class GuestComponent extends Component{
             id: authService.getId()
         }
 
-        this.addReservation = this.addReservation.bind(this);   
+        this.addReservation = this.addReservation.bind(this);
+        this.deleteReservation = this.deleteReservation.bind(this);
     }
 
     addReservation(){
         this.props.history.push('/guest/add-reservation');
+    }
+
+    deleteReservation(reservationId){
+        GuestService.deleteReservation(reservationId).then((res) => {
+            this.setState({reservations: this.state.reservations.filter(reservation => reservation.reservationId !== reservationId)});
+        })
     }
     
     componentDidMount(){
@@ -64,13 +71,13 @@ class GuestComponent extends Component{
                                 {
                                     this.state.reservations.map(
                                         reservation => 
-                                        <tr key = {reservation.roomId}>
+                                        <tr key = {reservation.reservationId}>
                                         <td> {reservation.roomNumber}</td>
                                         <td> {reservation.roomType}</td>
                                         <td> {reservation.startDate}</td>
                                         <td> {reservation.endDate}</td>
                                         <td>
-                                            {currentDate === reservation.startDate ?
+                                            {currentDate >= reservation.startDate ?
                                             <button className="btn btn-primary btn-sm" >
                                                 Check-out
                                             </button>
@@ -79,10 +86,11 @@ class GuestComponent extends Component{
                                                 Check-in
                                             </button>
                                             }
-                                            {currentDate === reservation.startDate ?
+                                            {
+                                            currentDate >= reservation.startDate ?
                                             <button className="btn btn-success btn-sm" style={{marginLeft: "10px"}}>Open room</button>
                                             :
-                                            <button className="btn btn-success btn-sm" style={{marginLeft: "10px"}}>Cancel</button>
+                                            <button className="btn btn-danger btn-sm" onClick = { () => this.deleteReservation(reservation.reservationId)} style={{marginLeft: "10px"}}>Cancel</button>
                                             }
                                            
                                         </td>
