@@ -62,7 +62,7 @@ public class RoomController {
         roomToUpdate.setNumber(room.getNumber());
         roomToUpdate.setPrice(room.getPrice());
         roomToUpdate.setStatus(room.getStatus());
-        roomToUpdate.setType(room.getStatus());
+        roomToUpdate.setType(room.getType());
         return ResponseEntity.ok(roomRepository.save(roomToUpdate));
     }
 

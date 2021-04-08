@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
-    @Query("SELECT r FROM Room r " +
+    @Query("SELECT DISTINCT r FROM Room r " +
             "LEFT JOIN ReservationRoom rr ON r.id=rr.roomId " +
             "LEFT JOIN Reservation reservations ON rr.reservationId=reservations.id " +
             "WHERE (reservations.id is NULL OR reservations.endDate<=DATE(:startDate) OR reservations.startDate>=DATE(:endDate)) AND r.type=:type")

@@ -62,8 +62,8 @@ public class GuestController {
         List<Map<String, Object>> reply = new LinkedList<>();
         list.forEach(objects -> {
             Map<String,Object> map = new HashMap<>();
-            map.put("startDate",objects[0]);
-            map.put("endDate",objects[1]);
+            map.put("startDate",objects[0].toString().substring(0,10));
+            map.put("endDate",objects[1].toString().substring(0,10));
             map.put("roomNumber",objects[2]);
             map.put("roomType",objects[3]);
             map.put("roomId",objects[4]);
