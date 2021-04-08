@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import trustyshoes.springboot.model.Admin;
+import trustyshoes.springboot.model.Reservation;
 import trustyshoes.springboot.model.SendEmailService;
 import trustyshoes.springboot.repository.AdminRepository;
 import trustyshoes.springboot.repository.GuestRepository;
+import trustyshoes.springboot.repository.ReservationRepository;
 
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class AdminController {
 
     @Autowired
     private GuestRepository guestRepository;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @Autowired
     private SendEmailService sendEmailService;
@@ -40,6 +45,11 @@ public class AdminController {
         if(found!=null){
             return ResponseEntity.ok(found);
         }else {return ResponseEntity.notFound().build();}
+    }
+
+    @GetMapping("/admins/reservations")
+    public List<Reservation> getReservations(@RequestParam String startDate, @RequestParam String endDate) {
+       return reservationRepository.getReservationsByDate(startDate, endDate);
     }
 
     @PostMapping("/admins/sendoffers")

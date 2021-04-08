@@ -39,7 +39,7 @@ public class ReservationController {
 
         if(startDateTimestamp.before(currentTime) || endDateTimestamp.before(startDateTimestamp))
             return ResponseEntity.badRequest().build();
-        
+
         else {
             Map<String,Object> reply = new HashMap<>();
             Reservation reservation = new Reservation();
