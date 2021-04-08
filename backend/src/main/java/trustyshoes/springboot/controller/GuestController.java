@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
@@ -54,7 +55,10 @@ public class GuestController {
 
     @GetMapping("/guests/search")
     public List<Room> getAvailableRooms(@RequestParam String start, @RequestParam String end, @RequestParam int type){
-        return roomRepository.findByReservationDate(start,end,type);
+        System.out.println(roomRepository.findOccupiedRoomsIds(start,end));
+        return roomRepository.findAll().stream().filter(room ->
+                !roomRepository.findOccupiedRoomsIds(start,end).contains(room.getId()) && room.getType()==type)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/guests/reservations/{id}")
