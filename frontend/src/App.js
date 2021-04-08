@@ -19,6 +19,8 @@ import { AdminRoute } from './routes/admin.route';
 import { StaffRoute } from './routes/staff.route';
 import { GuestRoute } from './routes/guest.route';
 import UnauthorizedComponent from './components/UnauthorizedComponent';
+import SendOffersComponent from './components/SendOffersComponent';
+import ViewReservationsComponent from './components/ViewReservationsComponent';
 
 function App() {
   return (
@@ -44,6 +46,16 @@ function App() {
         exact
         path="/admin/update-room/:id"
         component={UpdateRoomComponent}
+      />
+      <AdminRoute
+        exact
+        path="/admin/sendoffers"
+        component={SendOffersComponent}
+      />
+      <AdminRoute
+        exact
+        path="/admin/viewreservations"
+        component={ViewReservationsComponent}
       />
 
       <StaffRoute

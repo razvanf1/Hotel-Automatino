@@ -79,7 +79,7 @@ public class GuestController {
         return reply;
     }
 
-    @PutMapping("/guests/reservations/{id}")
+    @PutMapping("/guests/reservations/checkin/{id}")
     public ResponseEntity checkIn(@PathVariable Integer id) {
         Room roomToCheckIn = roomRepository.findById(roomRepository.findRoomIdFromReservation(id)).get();
         Reservation currentReservation = reservationRepository.findById(id).get();

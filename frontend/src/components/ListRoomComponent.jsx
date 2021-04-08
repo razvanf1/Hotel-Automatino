@@ -10,6 +10,8 @@ class ListRoomComponent extends Component {
             rooms: []
         }
         this.addRoom = this.addRoom.bind(this);
+        this.sendOffers = this.sendOffers.bind(this);
+        this.viewReservations = this.viewReservations.bind(this);
         this.editRoom = this.editRoom.bind(this);
         this.deleteRoom = this.deleteRoom.bind(this);
 
@@ -33,6 +35,14 @@ class ListRoomComponent extends Component {
 
     addRoom(){
         this.props.history.push('/admin/add-room');
+    }
+
+    sendOffers(){
+        this.props.history.push(`/admin/sendoffers`);
+    }
+    
+    viewReservations(){
+        this.props.history.push('admin/viewreservations');
     }
 
     render() {
@@ -74,6 +84,8 @@ class ListRoomComponent extends Component {
                 
                 <div className="row">
                     <button className = "btn btn-primary" onClick={this.addRoom} style={{marginRight: "10px"}}>Add Room</button>
+                    <button className = "btn btn-info" onClick={this.sendOffers} style={{marginRight: "10px"}}>Send offers</button>
+                    <button className = "btn btn-info" onClick={this.viewReservations} style={{marginRight: "10px"}}>View reservations</button>
                     <LogoutButton/>
                 </div>
             

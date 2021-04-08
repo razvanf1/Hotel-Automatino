@@ -21,8 +21,11 @@ class RoomService{
     }
 
     deleteRoom(roomId){
-        console.log(ROOM_API_BASE_URL + '/' + roomId);
         return axios.delete(ROOM_API_BASE_URL + '/' + roomId);
+    }
+
+    unlockRoom(roomId){
+        return axios.get(ROOM_API_BASE_URL + '/unlock/' + roomId);
     }
 
 }
