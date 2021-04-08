@@ -1,6 +1,5 @@
 package trustyshoes.springboot.controller;
 
-import ch.qos.logback.core.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +11,11 @@ import trustyshoes.springboot.repository.ReservationRepository;
 import trustyshoes.springboot.repository.RoomRepository;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
@@ -53,7 +55,10 @@ public class GuestController {
 
     @GetMapping("/guests/search")
     public List<Room> getAvailableRooms(@RequestParam String start, @RequestParam String end, @RequestParam int type){
-        return roomRepository.findByReservationDate(start,end,type);
+        System.out.println(roomRepository.findOccupiedRoomsIds(start,end));
+        return roomRepository.findAll().stream().filter(room ->
+                !roomRepository.findOccupiedRoomsIds(start,end).contains(room.getId()) && room.getType()==type)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/guests/reservations/{id}")
@@ -62,11 +67,12 @@ public class GuestController {
         List<Map<String, Object>> reply = new LinkedList<>();
         list.forEach(objects -> {
             Map<String,Object> map = new HashMap<>();
-            map.put("startDate",objects[0]);
-            map.put("endDate",objects[1]);
+            map.put("startDate",objects[0].toString().substring(0,10));
+            map.put("endDate",objects[1].toString().substring(0,10));
             map.put("roomNumber",objects[2]);
             map.put("roomType",objects[3]);
             map.put("roomId",objects[4]);
+            map.put("reservationId",objects[5]);
             reply.add(map);
         });
         return reply;

@@ -3,7 +3,6 @@ package trustyshoes.springboot.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
