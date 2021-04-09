@@ -72,7 +72,7 @@ class LoginComponent extends Component {
                                     <div className="card-body">
                                         <form>
                                             <div className ="form-group">
-                                                <label> Email: </label>
+                                                <label> Email </label>
                                                 <input placeholder="Email" name="email" className="form-control" 
                                                     value={this.state.email} onChange={this.changeEmailHandler}/>
                                             </div>

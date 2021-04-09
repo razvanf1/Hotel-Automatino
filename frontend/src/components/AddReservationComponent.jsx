@@ -75,7 +75,7 @@ class AddReservationComponent extends Component {
                         <div className = "container"> 
                             <div className = "row">
                                 <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                    <h3 className="text-center">Edit Room</h3>
+                                    <h3 className="text-center">Add reservation</h3>
                                     <div className="card-body">
                                         <form>
                                             <div className ="form-group">
@@ -92,7 +92,7 @@ class AddReservationComponent extends Component {
                                                 <label> Room Type: </label>
                                                 <input placeholder="Room Type" name="type" className="form-control" 
                                                     value={this.state.roomType} onChange={this.changeTypeHandler}/>
-                                            </div>
+                                            </div>                                   
         
                                             <button className="btn btn-success" onClick={this.searchRooms}>Search</button>
                                             <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>

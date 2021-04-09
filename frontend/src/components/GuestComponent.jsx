@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import LogoutButton from './LogoutButton';
 import auth         from '../services/AuthService';
 import GuestService from '../services/GuestService';
-import RoomServices from '../services/RoomService'
+import RoomServices from '../services/RoomService';
+import UnlockDoorButtonComponent from '../components/UnlockDoorButtonComponent';
 
 class GuestComponent extends Component{
 
@@ -70,12 +71,8 @@ class GuestComponent extends Component{
         const currentDate = new Date().toJSON().slice(0,10).replace(/-/g,'-');
         return (
             <div>
-                <div className="container">
-                    <h2>Welcome, {authService.getUsername()}!</h2>
-                    <p>Email: {authService.getEmail()}</p>
-                </div>
-                
-                {this.state.reservations.length > 0 &&
+                <h2 className="text-left pl-0 ml-0">Welcome, {authService.getUsername()}!</h2>
+                {this.state.reservations.length > 0 ?
                     <div>
                         <h2 className="text-left">Reservations List</h2>
                         <div className = "row">
@@ -95,7 +92,14 @@ class GuestComponent extends Component{
                                                 reservation => 
                                                 <tr key = {reservation.reservationId}>
                                                 <td> {reservation.roomNumber}</td>
-                                                <td> {reservation.roomType}</td>
+                                                {reservation.roomType === 1 ? 
+                                                <td>Single</td>
+                                                : 
+                                                reservation.roomType === 2 ?
+                                                    <td>Double</td>
+                                                    :
+                                                        <td>Twin</td>
+                                             }
                                                 <td> {reservation.startDate}</td>
                                                 <td> {reservation.endDate}</td>
                                                 <td>
@@ -117,10 +121,9 @@ class GuestComponent extends Component{
                                                     {
                                                         currentDate >= reservation.startDate &&
                                                             reservation.roomStatus === 1 &&
-                                                                <button className="btn btn-primary btn-sm" onClick = { () => this.unlockDoor(reservation.roomId)} style={{marginLeft: "10px"}}>
-                                                                    Unlock Door
-                                                                </button>
-                                                    }                                                                         
+                                                                <div style={{marginTop: "10px"}}><UnlockDoorButtonComponent roomId = {reservation.roomId}/></div>
+                                                    }             
+                                                                                                           
                                                 </td>
                                             </tr>
                                             )
@@ -129,14 +132,15 @@ class GuestComponent extends Component{
                                 </table>
                         </div>
                     </div>
+                    :
+                    <p className="text-left">No active reservations...</p>
                 }
 
-
-                <div className = "row">
+                <div className = "row mx-0">
                     <button className = "btn btn-primary" onClick={this.addReservation} style={{marginRight: "10px"}}>Add reservation</button>
                     <LogoutButton/>
                 </div>
-                
+            
             </div>
         );
     }

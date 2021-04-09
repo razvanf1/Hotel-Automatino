@@ -7,6 +7,10 @@ class StaffServices{
         return axios.post(STAFF_API_BASE_URL + '/login', user);
     }
 
+    getRooms(){
+        return axios.get(STAFF_API_BASE_URL + '/rooms');
+    }
+
 }
 
 export default new StaffServices();
