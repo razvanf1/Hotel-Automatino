@@ -11,14 +11,14 @@ class AddReservationComponent extends Component {
                 disponibleRooms: [],
                 startDate: '',
                 endDate:'',
-                roomType:'',
+                roomType:'1',
                 guestId: authService.getId()
             }  
     
             this.changeStartDateHandler = this.changeStartDateHandler.bind(this);
             this.changeEndDateHandler = this.changeEndDateHandler.bind(this);
-            this.changeTypeHandler = this.changeTypeHandler.bind(this);
             this.saveReservation = this.saveReservation.bind(this);
+            this.handleChange = this.handleChange.bind(this);
 
         }
 
@@ -57,11 +57,12 @@ class AddReservationComponent extends Component {
                 disponibleRooms: [],
                 endDate: event.target.value});    
         }
-    
-        changeTypeHandler = (event) =>{
+
+        handleChange = (event) =>{
             this.setState({
                 disponibleRooms: [],
-                roomType: event.target.value});      
+                roomType: event.target.value}); 
+            console.log(event.target.value);
         }
     
         cancel(){
@@ -87,13 +88,16 @@ class AddReservationComponent extends Component {
                                                 <label >End Date: </label>
                                                 <input placeholder="End Date" name="endDate" type="date" className="form-control" 
                                                     value={this.state.endDate} onChange={this.changeEndDateHandler}/>
-                                            </div>
+                                            </div>                                 
                                             <div className ="form-group">
-                                                <label> Room Type: </label>
-                                                <input placeholder="Room Type" name="type" className="form-control" 
-                                                    value={this.state.roomType} onChange={this.changeTypeHandler}/>
-                                            </div>                                   
-        
+                                                 <label >Room Type: </label>
+                                                <select value={this.state.roomType} onChange={this.handleChange} className="form-control">                                
+                                                    <option value="1">Single</option>
+                                                    <option value="2">Double</option>
+                                                    <option value="3">Twin</option>
+                                                </select>
+                                            </div>                   
+
                                             <button className="btn btn-success" onClick={this.searchRooms}>Search</button>
                                             <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                         </form>
