@@ -49,7 +49,7 @@ public class AdminController {
 
     @GetMapping("/admins/reservations")
     public List<Reservation> getReservations(@RequestParam String startDate, @RequestParam String endDate) {
-       return reservationRepository.getReservationsByDate(startDate, endDate);
+        return reservationRepository.getReservationsByDate(startDate, endDate);
     }
 
     @PostMapping("/admins/sendoffers")

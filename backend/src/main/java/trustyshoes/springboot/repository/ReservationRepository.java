@@ -19,7 +19,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
             "ORDER by r.start_date", nativeQuery = true)
     List<Object[]> getReservations(int id);
 
-    @Query(value = "SELECT * from reservations r WHERE r.start_date > DATE(:startDate) AND r.end_date < DATE(:endDate)", nativeQuery = true)
+    @Query(value = "SELECT * from reservations r WHERE r.start_date >= DATE(:startDate) AND r.end_date <= DATE(:endDate)", nativeQuery = true)
     List<Reservation> getReservationsByDate(String startDate, String endDate);
 
 }
