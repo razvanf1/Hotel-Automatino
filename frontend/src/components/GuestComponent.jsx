@@ -74,7 +74,7 @@ class GuestComponent extends Component{
                 <h2 className="text-left pl-0 ml-0">Welcome, {authService.getUsername()}!</h2>
                 {this.state.reservations.length > 0 ?
                     <div>
-                        <h2 className="text-left">Reservations List</h2>
+                        <h3 className="text-left">Reservations List</h3>
                         <div className = "row">
                                 <table className = "table table-striped table-bordered">
                                     <thead>

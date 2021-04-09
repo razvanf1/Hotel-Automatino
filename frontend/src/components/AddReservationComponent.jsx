@@ -11,7 +11,7 @@ class AddReservationComponent extends Component {
                 disponibleRooms: [],
                 startDate: '',
                 endDate:'',
-                roomType:'1',
+                roomType:1,
                 guestId: authService.getId()
             }  
     
@@ -92,9 +92,9 @@ class AddReservationComponent extends Component {
                                             <div className ="form-group">
                                                  <label >Room Type: </label>
                                                 <select value={this.state.roomType} onChange={this.handleChange} className="form-control">                                
-                                                    <option value="1">Single</option>
-                                                    <option value="2">Double</option>
-                                                    <option value="3">Twin</option>
+                                                    <option value='1'>Single</option>
+                                                    <option value='2'>Double</option>
+                                                    <option value='3'>Twin</option>
                                                 </select>
                                             </div>                   
 

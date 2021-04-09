@@ -24,7 +24,6 @@ class GuestServices{
 
     deleteReservation(reservationId){
         return axios.delete(GUEST_API_BASE_URL + '/reservations/' + reservationId);
-
     }
 
     checkIn(reservationId){
