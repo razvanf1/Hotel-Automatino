@@ -126,7 +126,14 @@ class AddReservationComponent extends Component {
                                                 room => 
                                                 <tr key = {room.id}>
                                                     <td> {room.number}</td>
-                                                    <td> {room.type} </td>   
+                                                    {room.type === 1 ? 
+                                                <td>Single</td>
+                                                : 
+                                                room.type === 2 ?
+                                                    <td>Double</td>
+                                                    :
+                                                        <td>Triple</td>
+                                             }   
                                                     <td> {room.price}</td>
                                                     <td>
                                                         <button className ="btn btn-primary" onClick={() => this.saveReservation(this.state.startDate, this.state.endDate, room.id, this.state.guestId)}>Reserve</button>                                 
