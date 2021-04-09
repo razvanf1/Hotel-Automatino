@@ -41,6 +41,8 @@ public class ReservationController {
             return ResponseEntity.badRequest().build();
 
         else {
+            startDateTimestamp = Timestamp.valueOf(startDate.replace(".","-")+" 00:00:00");
+            endDateTimestamp = Timestamp.valueOf(endDate.replace(".","-")+" 00:00:00");
             Map<String,Object> reply = new HashMap<>();
             Reservation reservation = new Reservation();
             reservation.setGuestId(guestId);
