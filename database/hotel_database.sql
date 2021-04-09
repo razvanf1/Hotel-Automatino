@@ -83,7 +83,10 @@ CREATE TABLE `guests` (
 INSERT INTO `guests` (`id`, `first_name`, `last_name`, `email`, `phone`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Kilian ', 'Mbappe', 'kill.Mbappe@gmail.com', '0732532433', 'vreauLAreal', '2021-03-29 17:23:02', '2021-03-29 17:23:02'),
 (2, 'Alexandru', 'Zimnicea', 'al_zimnicea20@yahoo.com', '0765232301', 'Zimnicea20_AL', '2021-03-29 17:23:02', '2021-03-29 17:23:02'),
-(3, 'Mihai', 'Petrea', 'guest@gmail.com', NULL, 'guest123', current_timestamp(), current_timestamp());
+(3, 'Mihai', 'Petrea', 'guest@gmail.com', NULL, 'guest123', current_timestamp(), current_timestamp()),
+(100, 'Razvan', 'Frunza', 'razvan.frunza@student.usv.ro', '0748551420', 'frunza123', current_timestamp(), current_timestamp()),
+(33, 'Alexandru', 'Serediuc', 'lazar.serediuc@student.usv.ro', NULL, 'alexeybomber', current_timestamp(), current_timestamp()),
+(69, 'Marian', 'Pascari', 'constantin.pascari@student.usv.ro', NULL, 'marinush15', current_timestamp(), current_timestamp());
 
 -- --------------------------------------------------------
 
