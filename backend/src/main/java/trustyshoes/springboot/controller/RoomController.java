@@ -9,7 +9,9 @@ import trustyshoes.springboot.repository.DoorRepository;
 import trustyshoes.springboot.repository.RoomRepository;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -26,7 +28,11 @@ public class RoomController {
     //get all rooms
     @GetMapping("/rooms")
     public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+        return roomRepository.findAll()
+                .stream()
+                .sorted(Comparator
+                        .comparingInt(Room::getNumber))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/rooms/{id}")
