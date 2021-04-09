@@ -56,7 +56,7 @@ class ViewReservationsComponent extends Component {
             <div>
                 <div className = "container"> 
                             <div className = "row">
-                                <div className = "card col-md-6 offset-md-3 offset-md-3">
+                                <div className = "card col-md-6 offset-md-3 offset-md-3 mt-3">
                                     <h3 className="text-center">Search reservations</h3>
                                     <div className="card-body">
                                         <form>
@@ -80,7 +80,7 @@ class ViewReservationsComponent extends Component {
                         </div>
 
                         {this.state.reservations.length > 0 &&
-                        <div className = "row">
+                        <div className = "row mt-3">
                         <table className = "table table-striped table-bordered">
                             <thead>
                                 <tr>
@@ -97,8 +97,8 @@ class ViewReservationsComponent extends Component {
                                         <tr key = {reservation.id}>
                                              <td> {reservation.id}</td>
                                              <td> {reservation.guestId} </td>   
-                                             <td> {reservation.startDate}</td>
-                                             <td> {reservation.endDate}</td>
+                                             <td> {reservation.startDate.substr(0, reservation.startDate.indexOf('T'))}</td>
+                                             <td> {reservation.endDate.substr(0, reservation.endDate.indexOf('T'))}</td>
                                         </tr>
                                     )
                                 }

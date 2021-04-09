@@ -74,7 +74,7 @@ class AddReservationComponent extends Component {
                 <div>
                     <div>
                         <div className = "container"> 
-                            <div className = "row">
+                            <div className = "row mt-3">
                                 <div className = "card col-md-6 offset-md-3 offset-md-3">
                                     <h3 className="text-center">Add reservation</h3>
                                     <div className="card-body">

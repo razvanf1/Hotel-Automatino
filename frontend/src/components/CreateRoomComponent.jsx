@@ -7,14 +7,14 @@ class CreateRoomComponent extends Component {
         super(props)
         this.state = {
             number: '',
-            type: '',
+            type: '1',
             price: ''
         }  
 
         this.changeNumberHandler = this.changeNumberHandler.bind(this);
-        this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.changePriceHandler = this.changePriceHandler.bind(this);
         this.saveRoom = this.saveRoom.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     saveRoom = (event) => {
@@ -31,10 +31,6 @@ class CreateRoomComponent extends Component {
         this.setState({number: event.target.value});
     }
 
-    changeTypeHandler = (event) => {
-        this.setState({type: event.target.value});
-    }
-
     changePriceHandler = (event) =>{
         this.setState({price: event.target.value});
     }
@@ -43,12 +39,16 @@ class CreateRoomComponent extends Component {
         this.props.history.push('/admin');
     }
 
+    handleChange = (event) =>{
+        this.setState({type: event.target.value});
+        console.log(event.target.value);
+    }
 
     render() {
         return (
             <div>
                 <div className = "container"> 
-                    <div className = "row">
+                    <div className = "row mt-3">
                         <div className = "card col-md-6 offset-md-3 offset-md-3">
                             <h3 className="text-center">Add Room</h3>
                             <div className="card-body">
@@ -57,17 +57,20 @@ class CreateRoomComponent extends Component {
                                         <label> Room Number: </label>
                                         <input placeholder="Room Number" name="number" className="form-control" 
                                             value={this.state.number} onChange={this.changeNumberHandler}/>
-                                    </div>
-                                    <div className ="form-group">
-                                        <label >Room Type: </label>
-                                        <input placeholder="Room Type" name="type" className="form-control date" 
-                                            value={this.state.type} onChange={this.changeTypeHandler}/>
-                                    </div>
+                                    </div>                                   
                                     <div className ="form-group">
                                         <label> Room Price: </label>
                                         <input placeholder="Room Price" name="price" className="form-control" 
                                             value={this.state.price} onChange={this.changePriceHandler}/>
                                     </div>
+                                    <div className ="form-group">
+                                                 <label >Room Type: </label>
+                                                <select value={this.state.type} onChange={this.handleChange} className="form-control">                                
+                                                    <option value='1'>Single</option>
+                                                    <option value='2'>Double</option>
+                                                    <option value='3'>Twin</option>
+                                                </select>
+                                            </div> 
 
                                     <button className="btn btn-success" onClick={this.saveRoom}>Save</button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
