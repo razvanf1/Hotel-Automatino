@@ -34,8 +34,8 @@ public class ReservationController {
                                              @RequestParam String startDate, @RequestParam String endDate){
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        Timestamp startDateTimestamp = Timestamp.valueOf(startDate.replace(".","-")+" 00:00:00");
-        Timestamp endDateTimestamp = Timestamp.valueOf(endDate.replace(".","-")+" 00:00:00");
+        Timestamp startDateTimestamp = Timestamp.valueOf(startDate.replace(".","-")+" 23:59:59");
+        Timestamp endDateTimestamp = Timestamp.valueOf(endDate.replace(".","-")+" 23:59:59");
 
         if(startDateTimestamp.before(currentTime) || endDateTimestamp.before(startDateTimestamp))
             return ResponseEntity.badRequest().build();
